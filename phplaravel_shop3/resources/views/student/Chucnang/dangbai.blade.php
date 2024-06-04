@@ -50,8 +50,7 @@
     }
 </style>
 <a href="{{ route('profile.student') }}" class="btn btn-primary">Quay trở về</a>
-<form action="/student/store" method="POST" enctype="multipart/form-data">
-
+<form action="/student/store" method="POST" enctype="multipart/form-data" class="ool">
     @csrf
     <div class="form-group">
         <label for="name">Tên sản phẩm:</label>
@@ -71,11 +70,9 @@
     </div>
     <label for="product_type">Loại Sản Phẩm</label>
     <select id="product_type" name="product_type" required>
-        <option value="">Chọn loại sản phẩm</option>
-        <option value="electronics">Điện tử</option>
-        <option value="clothing">Quần áo</option>
-        <option value="food">Thực phẩm</option>
-        
+        <option value="Oilpainting">Tranh Sơn Dầu</option>
+        <option value="3Dpainting">Tranh 3d</option>
+        <option value="Electronics">Trang Phong Cảnh</option>
     </select>
     <button type="submit">Tạo sản phẩm</button>
 </form>

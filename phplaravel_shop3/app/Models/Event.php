@@ -27,4 +27,9 @@ class Event extends Model
         'StartDate' => 'datetime',
         'EndDate' => 'datetime',
     ];
+    public function exhibitionEntries()
+    {
+        return $this->hasMany(ExhibitionEntry::class, 'exhibition_id');
+    }
+    
 }

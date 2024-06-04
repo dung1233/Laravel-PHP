@@ -1,14 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Note</title>
+    <!-- Thêm các liên kết tới CSS của bạn ở đây -->
+</head>
+<body>
+    <!-- Kiểm tra thông báo thành công -->
+    @if (session('success'))
+        <script>
+            alert('{{ session('success') }}');
+            window.location.href = "{{ url('/student/sukien') }}"; // Thay đổi '/desired-url' thành URL bạn muốn chuyển đến
+        </script>
+    @endif
 
-@if(Session::has('success'))
-    <div class="alert alert-success">
-        {{ Session::get('success') }}
-    </div>
-    
-@endif
-<a href='{{url("/student/dangbai")}}' class="btn btn-primary">Tạo tiếp</a>
+    <!-- Kiểm tra thông báo lỗi -->
+    @if (session('error'))
+        <script>
+            alert('{{ session('error') }}');
+            window.location.href = "{{ url('/student/sukien') }}"; // Thay đổi '/desired-url' thành URL bạn muốn chuyển đến
+        </script>
+    @endif
 
-@if(Session::has('error'))
-    <div class="alert alert-danger">
-        {{ Session::get('error') }}
-    </div>
-@endif
+    <!-- Nội dung trang web của bạn ở đây -->
+</body>
+</html>

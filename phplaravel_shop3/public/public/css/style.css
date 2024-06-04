@@ -1685,3 +1685,37 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 /*# sourceMappingURL=style.css.map */
+.liked {
+  color: red;
+}
+.gallary {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+.gallary img {
+  max-width: 100%;
+}
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+.top-buttons, .bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.liked {
+  color: red;
+}
+.modal-xl {
+  max-width: 90%;
+}

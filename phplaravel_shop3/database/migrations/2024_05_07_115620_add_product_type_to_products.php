@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->string('product_type')->nullable(); // Thêm cột loại sản phẩm, có thể null
         });
+        
     }
 
     /**

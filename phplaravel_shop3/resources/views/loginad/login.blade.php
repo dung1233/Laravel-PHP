@@ -13,9 +13,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
@@ -39,32 +37,36 @@
                                     </div>
                                     <form class="user" action="/admin/user/login/store" method="POST">
                                         @csrf
+                                        @if($errors->any())
+                                        <div class="alert alert-danger">
+                                            @foreach ($errors->all() as $error)
+                                            <div>{{ $error }}</div>
+                                            @endforeach
+                                        </div>
+                                        @endif
                                         <!-- Các trường đăng nhập -->
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." name="email">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." name="email">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" name="password">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" name="remember" class="custom-control-input" id="customCheck"  >
-                                                <label class="custom-control-label" for="customCheck"  >Remember Me</label>
+                                                <input type="checkbox" name="remember" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                         <hr>
                                     </form>
-                                    
+
                                     <!-- Phần đăng xuất -->
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf <!-- Add CSRF token for protection -->
                                         <button type="submit" class="btn btn-secondary btn-user btn-block">Logout</button>
                                     </form>
-                                    
+
                                     <a href="index.html" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Login with Google
                                     </a>
@@ -72,13 +74,14 @@
                                         <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                     </a>
                                     
-                                    
+
+
                                     <hr>
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" href="{{ route('create.account') }}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>

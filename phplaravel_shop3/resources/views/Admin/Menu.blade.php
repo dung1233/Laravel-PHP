@@ -1,11 +1,11 @@
 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route ('profile.admin') }}">
 <div class="sidebar-brand-icon rotate-n-15">
 <i class="fas fa-laugh-wink"></i>
 </div>
-<div class="sidebar-brand-text mx-3">SB Admin <sup>1</sup></div>
+<div class="sidebar-brand-text mx-3">D Admin <sup>1</sup></div>
 </a>
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
@@ -32,8 +32,7 @@ aria-expanded="true" aria-controls="collapseTwo">
 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Tạo sự kiện triển lãm:</h6>
-    <a class="collapse-item" href="{{ route('create.event') }}">Tổ chức offline</a>
-    <a class="collapse-item" href="cards.html">Tổ chức online</a>
+    <a class="collapse-item" href="{{ route('create.event') }}">Tổ chức Event</a>
     <a class="collapse-item" href="{{ route('events.history') }}">Lịch Sử</a>
 </div>
 </div>
@@ -49,7 +48,7 @@ aria-expanded="true" aria-controls="collapseUtilities">
 data-parent="#accordionSidebar">
 <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="utilities-color.html">Thông Báo</a>
+    <a class="collapse-item" href="{{ route('admin.prices.index') }}">Chỉnh Giá Tham gia Triển lãm</a>
     <a class="collapse-item" href="utilities-border.html">Other</a>
 </div>
 </div>
@@ -70,7 +69,7 @@ aria-expanded="true" aria-controls="collapsePages">
 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">QUản lý sinh viên :</h6>
-    <a class="collapse-item" href="login.html">DS sinh viên đăng bài</a>
+    <a class="collapse-item" href="{{ route('admin.history') }}">DS sinh viên đăng bài</a>
     <a class="collapse-item" href="forgot-password.html">DS siên viên đoạt giải</a>
     <a class="collapse-item" href="forgot-password.html"></a>
     <div class="collapse-divider"></div>

@@ -1,49 +1,56 @@
 <style>
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
+ body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
-    .table {
-    width: 600px; 
+
+.container {
+    width: 80%;
     margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.container h1 {
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table {
+    width: 100%;
+    margin: 20px 0;
     border-collapse: collapse;
     border-radius: 8px;
-    overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .table th, .table td {
-    padding: 8px;
+    padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    transition: background-color 0.3s ease;
 }
 
 .table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+    background-color: #f9f9f9;
+    font-weight: 600;
+    color: #333;
 }
 
 .table tbody tr:nth-child(even) {
-    background-color: #f8f8f8;
+    background-color: #fafafa;
 }
 
 .table tbody tr:hover {
-    background-color: #e2e2e2;
+    background-color: #e9e9e9;
     cursor: pointer;
-    transform: translateY(-2px);
-    transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.container h1{
-     
-    color: #fff; 
-    padding: 20px; /* Khoảng cách giữa chữ và khung */
-    font-family: 'Arial', sans-serif; /* Font chữ */
-    font-size: 36px; /* Kích thước font */
-    text-align: center; /* Canh lề giữa */
-    border-radius: 10px; /* Bo tròn viền */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
-}
+
 </style>
 <div class="container">
     <h1>Lịch Sử Tạo Sản Phẩm</h1>

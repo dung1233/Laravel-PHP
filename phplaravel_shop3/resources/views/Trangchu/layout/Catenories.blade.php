@@ -17,19 +17,8 @@
                 <!-- /.dropdown-menu --> </li>
               <!-- /.menu-item -->
               
-              <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-laptop" aria-hidden="true"></i>Acrylic Paint</a> 
+              <li class="dropdown menu-item"> <a href="#" ><i class="icon fa fa-laptop" aria-hidden="true"></i>Acrylic Paint</a> 
                 <!-- ================================== MEGAMENU VERTICAL ================================== -->
-                <ul class="dropdown-menu mega-menu">
-                  <li class="yamm-content">
-                    <div class="row">
-                    
-                      
-                      <div class="dropdown-banner-holder"> <a href="#"><img alt="" src="assets\images\banners\banner-side.png"></a> </div>
-                    </div>
-                    <!-- /.row --> 
-                  </li>
-                  <!-- /.yamm-content -->
-                </ul>
                 <!-- /.dropdown-menu --> 
                 <!-- ================================== MEGAMENU VERTICAL ================================== --> </li>
               <!-- /.menu-item -->
