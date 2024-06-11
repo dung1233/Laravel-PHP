@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExhibitionEntry extends Model
 {
-    protected $fillable = [
-        'user_id', 'exhibition_id', 'name', 'image_path', 'description'
-    ];
+    protected $fillable = ['user_id', 'exhibition_id', 'image_path', 'name', 'description', 'status'];
 
     public function user()
     {

@@ -20,6 +20,7 @@
             window.location.href = "{{ url('/student/sukien') }}"; // Thay đổi '/desired-url' thành URL bạn muốn chuyển đến
         </script>
     @endif
+    
 
     <!-- Nội dung trang web của bạn ở đây -->
 </body>

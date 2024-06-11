@@ -45,7 +45,6 @@
             <li class="nav-item">
               <a class="nav-link " href="#">Trang Chủ</a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="{{ route('profile.Event') }}">Event</a>
             </li>
@@ -57,23 +56,19 @@
             @auth
             @if(Auth::user()->UserType === 2)
             <li class="nav-item">
-              <a class="nav-link active" href="{{ route('profile.student') }}"></i> {{ Auth::user()->name }}</a>
+              <a class="nav-link active" href="{{ route('profile.student') }}">{{ Auth::user()->name }}</a>
             </li>
             @elseif(Auth::user()->UserType === 3)
             <li class="nav-item">
-              <a class="nav-link active" href="{{ route('profile.external') }}"></i> {{ Auth::user()->name }}</a>
+              <a class="nav-link active" href="{{ route('profile.external') }}">{{ Auth::user()->name }}</a>
             </li>
-            @elseif(Auth::user()->TypeID === null)
-            <li class="nav-item">
-              <a class="nav-link active" href="#"><i class="icon fa fa-user"></i> {{ Auth::user()->name }}</a>
-            </li>
-            @else
+            @elseif(Auth::user()->UserType !== 1) <!-- Thêm điều kiện kiểm tra không phải là admin -->
             <li class="nav-item">
               <a class="nav-link active" href="#"><i class="icon fa fa-user"></i> {{ Auth::user()->name }}</a>
             </li>
             @endif
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('logout') }}"></i> Logout</a>
+              <a class="nav-link" href="{{ route('logout') }}">Logout</a>
             </li>
             @else
             <li class="nav-item">
@@ -192,8 +187,9 @@
       $latestExhibition = $exhibitions->sortByDesc('ExhibitionID')->first();
       @endphp
       <div class="ikm">
-        @if ($latestExhibition)
         <h1><b>Thông Tin Tham Gia Sự Kiện</b></h1>
+        @if ($latestExhibition)
+
       </div>
       <!-- <p>{{ $latestExhibition->Description }}</p> -->
       <div class="ikn">
@@ -208,7 +204,10 @@
         <div class="ikb">
           <div><img src="icon/icon-clock-20231107042421-rkntj.png" alt=""></div>
           <div>
-            <h3><b>Thời Gian Bình Chọn</b></h3>
+            <h3><b>Thời Gian Bình Chọn</b>
+              <p>Thứ 2 - CN</p>
+              <p></p>
+            </h3>
           </div>
         </div>
         <div class="ikb">
@@ -229,305 +228,349 @@
       </div>
       <div class="yui">
         <div class="uyt">
-          <img src="images/triển lãm mùa hè.jpg" alt="" srcset="" width="100%">
+
+          <a href="#"><img src="images/triển lãm mùa hè.jpg" alt="" srcset="" width="100%"></a>
         </div>
         <div class="uyt">
-          <img src="images/triển lãm mùa xuân.jpg" alt="" width="100%">
+          <a href="#"><img src="images/triển lãm mùa xuân.jpg" alt="" width="100%"></a>
         </div>
         <div class="uyt">
-          <img src="images/triển lãm mùa thu.jpg" alt="" width="100%">
+          <a href="#"><img src="images/triển lãm mùa thu.jpg" alt="" width="100%"></a>
         </div>
         <div class="uyt">
-          <img src="images/Triển lãm mùa đông.jpg" alt="" width="100%">
+          <a href="#"><img src="images/Triển lãm mùa đông.jpg" alt="" width="100%"></a>
         </div>
       </div>
       <div class="ytr">
-        <div class="yhn" style="margin-left: 100px;margin-top: 20px;">
-          <h2 style="color: rgb(255, 145, 77)"><b>Đối Tượng Tham Gia Sự kiện </b></h2>
-          <p style="color: white;">-Bạn Là sinh viên của trường (sinh viên mọi năm đều có thể tham gia)</p>
-          <br>
-          <h2 style="color: rgb(255, 145, 77)"><b>Thể lệ Đăng ký</b></h2>
-          <p style="color: white;">-Để tham gia sự kiện,sinh viên đăng nhập vào tài khoản cá nhân của trường để tham gia </p>
-          <p style="color: white;">-Nếu có xẩy ra vấn đề hãy liên hệ <a href="#">tại đây</a> hoặc chat trực tiếp với quản lý </p>
-          <br>
-          <h2 style="color: rgb(255, 145, 77)"><b>Sự kiện có 2 vòng thi</b></h2>
-          <h5 style="color: rgb(255, 145, 77)"> Vòng 1</h5>
-          <p>-Sinh viên khi gửi bài lên dự thi sẽ được hội đồng quản lý xét duyệt nếu tranh đủ điều kiện sẽ được thông qua</p>
-          <h5 style="color: rgb(255, 145, 77)"> Vòng 2</h5>
-          <p>-Các bài được duyệt sẽ gửi lên 1 trang công khai để các mọi người lựa chọn (bao gồm sinh viên trong trường và cả bên ngoài)
-            bài dự thi nào được nhiều like nhất khi kết thúc cuộc thi sẽ là người chiến thắng
-          </p>
-          <br>
-          <h2 style="color: rgb(255, 145, 77)"><b>Về việc sử dụng hình ảnh và tác phẩm dự thi</b></h2>
-          <p style="color: white;">-Trường Đại học GIGAMAI được toàn quyền sử dụng hình ảnh của thí sinh và tất cả các tác phẩm dự thi trước, trong và sau cuộc thi cho mục đích truyền thông và các hoạt động khác của nhà trường mà không phải trả bất cứ chi phí nào liên quan.</p>
-          <br>
-          <h2 style="color: rgb(255, 145, 77)"><b>Cơ cấu giải thưởng</b></h2>
-          <p style="color: white;"><i class="fa-solid fa-circle">Giải Nhất (1 giải)</i></p>
-          <p>30.000.000 đồng và học bổng 70% học phí 4 năm đại học (trị giá khoảng 166,9 - 444,4 triệu đồng/suất)</p>
-          <p style="color: white;"><i class="fa-solid fa-circle">Giải Nhì (1 giải)</i></p>
-          <p>20.000.000 đồng và học bổng 100% học phí năm 1 (trị giá khoảng 46,4 - 162,6 triệu đồng/suất)</p>
-          <p style="color: white;"><i class="fa-solid fa-circle">Giải khuyến khích (3 giải)</i></p>
-          <p>Mỗi giải 5.000.000 đồng/giải và học bổng 30% học phí năm 1 (trị giá khoảng 13,9 - 48,8 triệu đồng/suất)</p>
-          <br>
-          <p style="color: rgb(255, 145, 77)">*Lưu ý:</p>
-          <p style="color: rgb(255, 145, 77)">-Tham gia sự kiện đúng giờ và ngày ghi trên page</p>
-          <p style="color: rgb(255, 145, 77)">-Mỗi sinh viên có thể gửi 1 bài dự thi duy nhất</p>
-          <p style="color: rgb(255, 145, 77)">-Bài của sinh viên khi gửi bài lên sẽ được xem xét qua có thể bị từ chối</p>
-          <p style="color: rgb(255, 145, 77)">-Phần thưởng sẽ trao cho người thắng cuộc sau 12 tiếng khi kết thúc cuộc thi</p>
-          <p style="color: rgb(255, 145, 77)">-Thí sinh có thể huỷ bài dự thi trước hoặc sau khi bài được đưa lên tham gia mà không cần qua người quản lý</p>
-          <br>
-          <form id="event-form" action="{{ route('join.event') }}" method="POST">
-            @csrf
-            <label>
-              <input type="checkbox" name="agree" id="agree">
-              Tôi đã đọc và chấp hành đúng nội quy
-            </label>
-            <button type="submits">Tham gia sự kiện</button>
-          </form>
-          <br>
-          <br>
-          <div class="tree">
-            <h1>
-              <b>WELCOME TO</b>
-              <br>
-              <h1><b>
-                  GIGAMAIL ART LIGHTING EXPERIENCE VIETNAM
-                </b></h1>
-            </h1>
-            <br>
-            <p style="color: white;">
-              CHÀO MỪNG BẠN ĐẾN VỚI TRIỂN LÃM ĐA GIÁC QUAN TẠI GIGAMAIL VIỆT NAM
-            </p>
+        <div class="container mt-3">
 
-            <div class="trf">
-              <img src="images/sitemap-240cmx160cmh-1108_fa-20231113100557-927ps.png" alt="" srcset="" width="100%">
-            </div>
-            <br>
-            <div class="tgh">
-              <div class="trs">
-                <div>
-                  <h2><b>INTERACTIVE ENTRANCE</b></h2>
-                  <p>Xuyên qua bức tường hiện tại,
-                    Từ hành lang tương tác, du khách bước qua làn khói sương mờ, bóng gương ảo ảnh, đưa chúng ta vào thế giới nghệ thuật</p>
+          <button type="button" class="btna" data-bs-toggle="modal" data-bs-target="#eventModal" id="hiddenButton" style="display:none;">
+            <b>Đăng ký Tham Gia</b>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="eventModalLabel" style="color: black;">Điều kiện và Giải Thưởng</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <br>
-                <div>
-                  <a href="images/shisheido-designboom-7-20231016070224-qha-e.jpg" class="image-link">
-                    <img src="images/shisheido-designboom-7-20231016070224-qha-e.jpg" width="100%">
-                  </a>
-                </div>
-              </div>
-              <hr>
-              <div class="trs">
-                <div>
-                  <h2><b>VÙNG ĐẤT CỦA VINCENT</b></h2>
-                  <p>Lắng đọng theo từng cung bậc cảm xúc với câu chuyện cuộc đời, lý tưởng về con đường nghệ thuật đầy dấu ấn</p>
-                </div>
-                <br>
-                <div>
-                  <a href="images/412619201_122124784946086141_125458319236205293_n-20240224035046-kpey7.jpg" class="image-link">
-                    <img src="images/412619201_122124784946086141_125458319236205293_n-20240224035046-kpey7.jpg" width="100%">
-                  </a>
-                </div>
-                <div>
+                <div class="modal-body" style="background-color: black;padding: 30px;">
+                  <!-- Nội dung của bạn được đặt tại đây -->
+                  <h2 style="color: rgb(255, 145, 77)"><b>Đối Tượng Tham Gia Sự kiện </b></h2>
+                  <p style="color: white;padding: 10px;">-Bạn Là sinh viên của trường (sinh viên mọi năm đều có thể tham gia)</p>
                   <br>
-                  <a href="images/picture8-20231114024843-bpum-.jpg" class="image-link">
-                    <img src="images/picture8-20231114024843-bpum-.jpg" width="100%">
-                  </a>
+                  <h2 style="color: rgb(255, 145, 77)"><b>Thể lệ Đăng ký</b></h2>
+                  <p style="color: white;padding: 10px;">-Để tham gia sự kiện,sinh viên đăng nhập vào tài khoản cá nhân của trường để tham gia </p>
+                  <p style="color: white;padding: 10px;">-Nếu có xẩy ra vấn đề hãy liên hệ <a href="#">tại đây</a> hoặc chat trực tiếp với quản lý </p>
+                  <br>
+                  <h2 style="color: rgb(255, 145, 77)"><b>Sự kiện có 2 vòng thi</b></h2>
+                  <h5 style="color: rgb(255, 145, 77)"> Vòng 1</h5>
+                  <p style="color: white;padding: 10px;">-Sinh viên khi gửi bài lên dự thi sẽ được hội đồng quản lý xét duyệt nếu tranh đủ điều kiện sẽ được thông qua</p>
+                  <h5 style="color: rgb(255, 145, 77)"> Vòng 2</h5>
+                  <p style="color: white;padding: 10px;">-Các bài được duyệt sẽ gửi lên 1 trang công khai để các mọi người lựa chọn (bao gồm sinh viên trong trường và cả bên ngoài)
+                    bài dự thi nào được nhiều like nhất khi kết thúc cuộc thi sẽ là người chiến thắng
+                  </p>
+                  <br>
+                  <h2 style="color: rgb(255, 145, 77);padding: 10px;"><b>Về việc sử dụng hình ảnh và tác phẩm dự thi</b></h2>
+                  <p style="color: white;padding: 10px;">-Trường Đại học GIGAMAI được toàn quyền sử dụng hình ảnh của thí sinh và tất cả các tác phẩm dự thi trước, trong và sau cuộc thi cho mục đích truyền thông và các hoạt động khác của nhà trường mà không phải trả bất cứ chi phí nào liên quan.</p>
+                  <br>
+                  <h2 style="color: rgb(255, 145, 77)"><b>Cơ cấu giải thưởng</b></h2>
+                  <p style="color: white;padding: 10px;"><img src="images/—Pngtree—gold 1st place medal vector_5205674.png" alt="" srcset="" width="20%">Giải Nhất (1 giải)</i></p>
+                  <p style="color: white;padding: 10px;">30.000.000 đồng và học bổng 70% học phí 4 năm đại học (trị giá khoảng 166,9 - 444,4 triệu đồng/suất)</p>
+                  <p style="color: white;padding: 10px;"><img src="images/—Pngtree—silver 2st place medal vector_5205675 copy.png" alt="" srcset="" width="20%><i class=" fa-solid fa-circle">Giải Nhì (1 giải)</i></p>
+                  <p style="color: white;padding: 10px;">20.000.000 đồng và học bổng 100% học phí năm 1 (trị giá khoảng 46,4 - 162,6 triệu đồng/suất)</p>
+                  <p style="color: white;padding: 10px;"><img src="images/giainhat_black_background.png" alt="" srcset="" width="20%><i class=" fa-solid fa-circle">Giải khuyến khích (3 giải)</i></p>
+                  <p style="color: white;padding: 10px;">Mỗi giải 5.000.000 đồng/giải và học bổng 30% học phí năm 1 (trị giá khoảng 13,9 - 48,8 triệu đồng/suất)</p>
+                  <br>
+                  <p style="color: rgb(255, 145, 77);padding: 10px;">*Lưu ý:</p>
+                  <p style="color: rgb(255, 145, 77);padding: 10px;">-Tham gia sự kiện đúng giờ và ngày ghi trên page</p>
+                  <p style="color: rgb(255, 145, 77);padding: 10px;">-Mỗi sinh viên có thể gửi 1 bài dự thi duy nhất</p>
+                  <p style="color: rgb(255, 145, 77);padding: 10px;">-Bài của sinh viên khi gửi bài lên sẽ được xem xét qua có thể bị từ chối</p>
+                  <p style="color: rgb(255, 145, 77);padding: 10px;">-Phần thưởng sẽ trao cho người thắng cuộc sau 12 tiếng khi kết thúc cuộc thi</p>
+                  <p style="color: rgb(255, 145, 77);padding: 10px;">-Thí sinh có thể huỷ bài dự thi trước hoặc sau khi bài được đưa lên tham gia mà không cần qua người quản lý</p>
+                  <br>
+                  <form id="event-form" action="{{ route('join.event') }}" method="POST">
+                    @csrf
+                    <label>
+                      <input type="checkbox" name="agree" id="agree">
+                      Tôi đã đọc và chấp hành đúng nội quy
+                    </label>
+                    <button type="submits"><b>Tham gia</b></button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-          <div style="text-align: center;">
-            <img src="images/image-from-rawpixel-id-9058604-png-20231107045041-pe6an.png" alt="" srcset="" width="15%">
+        </div>
+        <div class="prize" style="display: none;">
+          <div class="prizea">
+            <div class="prizeb">
+              <div class="hovercard-container">
+                <img src="images/triển lãm mùa hè.jpg" alt="Triển lãm mùa hè" class="imgah" width="100%">
+                <div class="hovercard">
+                  <h3>Triển lãm mùa hè</h3>
+                  <p>Thông tin chi tiết về triển lãm mùa hè. Những tác phẩm nghệ thuật độc đáo sẽ được trưng bày tại sự kiện.</p>
+                  <p>Tác giả: Nguyễn Văn A</p>
+                  <p>Điểm bình chọn:</p>
+                  <p>Ngày Đăng Bài:</p>
+                  <p>Thể loại: Hội họa</p>
+                  <p>Lượt xem:</p>
+                </div>
+              </div>
+              <div class="mvvc">
+                <img src="images/giai1.png" alt="Giải 2" width="30%">
+              </div>
+              <i>"Mùa hè mang đến hơi thở của nghệ thuật, khi những bông hoa rực rỡ như bảng màu của thiên nhiên và ánh nắng chan hòa như nét vẽ của một bậc thầy tài hoa."</i>
+            </div>
+          </div>
+          <div class="prizea">
+            <div class="prizeb">
+              <div class="hovercard-container">
+                <img src="images/triển lãm mùa hè.jpg" alt="Triển lãm mùa hè" class="imgah" width="100%">
+                <div class="hovercard">
+                  <h3>Triển lãm mùa hè</h3>
+                  <p>Thông tin chi tiết về triển lãm mùa hè. Những tác phẩm nghệ thuật độc đáo sẽ được trưng bày tại sự kiện.</p>
+                  <p>Tác giả: Nguyễn Văn A</p>
+                  <p>Điểm bình chọn:</p>
+                  <p>Ngày Đăng Bài:</p>
+                  <p>Thể loại: Hội họa</p>
+                  <p>Lượt xem:</p>
+                </div>
+              </div>
+              <div class="mvvc">
+                <img src="images/gai2.png" alt="Giải 2" width="30%">
+              </div>
+              <i>"Mùa hè mang đến hơi thở của nghệ thuật, khi những bông hoa rực rỡ như bảng màu của thiên nhiên và ánh nắng chan hòa như nét vẽ của một bậc thầy tài hoa."</i>
+            </div>
+          </div>
+          <div class="prizea">
+            <div class="prizeb">
+              <div class="hovercard-container">
+                <img src="images/triển lãm mùa hè.jpg" alt="Triển lãm mùa hè" class="imgah" width="100%">
+                <div class="hovercard">
+                  <h3>Triển lãm mùa hè</h3>
+                  <p>Thông tin chi tiết về triển lãm mùa hè. Những tác phẩm nghệ thuật độc đáo sẽ được trưng bày tại sự kiện.</p>
+                  <p>Tác giả: Nguyễn Văn A</p>
+                  <p>Điểm bình chọn:</p>
+                  <p>Ngày Đăng Bài:</p>
+            
+                </div>
+              </div>
+              <div class="mvvc">
+                <img src="images/giainhat_black_background.png" alt="Giải 2" width="30%">
+              </div>
+              <i>"Mùa hè mang đến hơi thở của nghệ thuật, khi những bông hoa rực rỡ như bảng màu của thiên nhiên và ánh nắng chan hòa như nét vẽ của một bậc thầy tài hoa."</i>
+            </div>
+          </div>
+
+        </div>
+        <div class="containers mt-5s">
+          @if($event)
+          <div class="ikm">
+          <h1 style="text-transform: uppercase;"><b>BẢNG XẾP HẠNG <br> {{ $event->Title }}</b></h1>
+          <hr>
+          <p style="padding: 10px;"><i>Tình trạng: {{ $isOngoing ? 'Đang diễn ra' : 'Kết thúc' }}</i></p>
+          @if(!$isOngoing)
+          <p style="padding: 10px;"><i>Kết thúc vào: {{ $event->EndDate->format('d/m/Y H:i') }}</i></p>
+          
+          @if($entries->isEmpty())
+          <p>Không có bức tranh nào đạt giải.</p>
+          @else
+          </div>
+          
+          <div class="prize">
+            @foreach($entries as $index => $entry)
+            @if($index == 0)
+            <div class="prizea">
+              <div class="prizeb">
+                <div class="hovercard-container">
+                  <img src="{{ asset($entry->image_path) }}" alt="Giải nhất" class="imgah" width="100%">
+                  <div class="hovercard">
+                    <h3>{{ $entry->name }}</h3>
+                    <p>{{ $entry->description }}</p>
+                    <p>Tác giả: {{ $entry->user->name }}</p>
+                    <p>Điểm bình chọn: {{ $entry->likes_count }}</p>
+                    <p>Ngày Đăng Bài: {{ $entry->created_at->format('d/m/Y') }}</p>
+                    
+                  </div>
+                </div>
+                <div class="mvvc">
+                  <img src="images/giai1.png" alt="Giải 1" width="30%">
+                </div>
+                <i>"Mùa xuân đến mang theo những tia nắng ấm áp, thổi bừng lên sắc hoa và hy vọng mới cho cuộc sống."</i>
+              </div>
+            </div>
+            @elseif($index == 1)
+            <div class="prizea">
+              <div class="prizeb">
+                <div class="hovercard-container">
+                  <img src="{{ asset($entry->image_path) }}" alt="Giải nhất" class="imgah" width="100%">
+                  <div class="hovercard">
+                    <h3>{{ $entry->name }}</h3>
+                    <p>{{ $entry->description }}</p>
+                    <p>Tác giả: {{ $entry->user->name }}</p>
+                    <p>Điểm bình chọn: {{ $entry->likes_count }}</p>
+                    <p>Ngày Đăng Bài: {{ $entry->created_at->format('d/m/Y') }}</p>
+                  
+                  </div>
+                </div>
+                <div class="mvvc">
+                  <img src="images/gai2.png" alt="Giải 1" width="30%">
+                </div>
+                <i>"Xuân về là lúc thiên nhiên như bừng tỉnh sau giấc ngủ đông dài, mang đến sự tươi mới và tràn đầy sức sống."</i>
+              </div>
+            </div>
+            @elseif($index == 2)
+            <div class="prizea">
+              <div class="prizeb">
+                <div class="hovercard-container">
+                  <img src="{{ asset($entry->image_path) }}" alt="Giải nhất" class="imgah" width="100%">
+                  <div class="hovercard">
+                    <h3>{{ $entry->name }}</h3>
+                    <p>{{ $entry->description }}</p>
+                    <p>Tác giả: {{ $entry->user->name }}</p>
+                    <p>Điểm bình chọn: {{ $entry->likes_count }}</p>
+                    <p>Ngày Đăng Bài: {{ $entry->created_at->format('d/m/Y') }}</p>
+                  
+                  </div>
+                </div>
+                <div class="mvvc">
+                  <img src="images/giainhat_black_background.png" alt="Giải 1" width="30%">
+                </div>
+                <i>"Mùa xuân là bức tranh tuyệt đẹp của thiên nhiên, nơi mọi thứ đều trở nên rực rỡ và đầy màu sắc, là thời khắc để ta bắt đầu những điều mới mẻ."</i>
+              </div>
+            </div>
+
+          </div>
+
+
+          @endif
+          @endforeach
+          @endif
+          @endif
+          @else
+          <p>Không có sự kiện nào .</p>
+          @endif
+        </div>
+
+
+
+
+
+        <div class="tree">
+          <h1>
+            <b>WELCOME TO</b>
             <br>
-            <p style="color: white;">Không gian trưng bày hơn 150 tác phẩm tiêu biểu</p>
+            <h1><b>
+                GIGAMAIL ART LIGHTING EXPERIENCE VIETNAM
+              </b></h1>
+          </h1>
+          <br>
+          <p style="color: white;">
+            CHÀO MỪNG BẠN ĐẾN VỚI TRIỂN LÃM ĐA GIÁC QUAN TẠI GIGAMAIL VIỆT NAM
+          </p>
+
+          <div class="trf">
+            <img src="images/sitemap-240cmx160cmh-1108_fa-20231113100557-927ps.png" alt="" srcset="" width="100%">
           </div>
           <br>
-          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="images/20231208_184330jpg-20240224041813-xzj28.png" class="d-block w-100" alt="...">
+          <div class="tgh">
+            <div class="trs">
+              <div>
+                <h2><b>INTERACTIVE ENTRANCE</b></h2>
+                <p>Xuyên qua bức tường hiện tại,
+                  Từ hành lang tương tác, du khách bước qua làn khói sương mờ, bóng gương ảo ảnh, đưa chúng ta vào thế giới nghệ thuật</p>
               </div>
-              <div class="carousel-item">
-                <img src="images/20231208_184330jpg-20240224041813-xzj28.png" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="images/20231208_184330jpg-20240224041813-xzj28.png" class="d-block w-100" alt="...">
+              <br>
+              <div>
+                <a href="images/shisheido-designboom-7-20231016070224-qha-e.jpg" class="image-link">
+                  <img src="images/shisheido-designboom-7-20231016070224-qha-e.jpg" width="100%">
+                </a>
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+            <hr>
+            <div class="trs">
+              <div>
+                <h2><b>VÙNG ĐẤT CỦA VINCENT</b></h2>
+                <p>Lắng đọng theo từng cung bậc cảm xúc với câu chuyện cuộc đời, lý tưởng về con đường nghệ thuật đầy dấu ấn</p>
+              </div>
+              <br>
+              <div>
+                <a href="images/412619201_122124784946086141_125458319236205293_n-20240224035046-kpey7.jpg" class="image-link">
+                  <img src="images/412619201_122124784946086141_125458319236205293_n-20240224035046-kpey7.jpg" width="100%">
+                </a>
+              </div>
+              <div>
+                <br>
+                <a href="images/picture8-20231114024843-bpum-.jpg" class="image-link">
+                  <img src="images/picture8-20231114024843-bpum-.jpg" width="100%">
+                </a>
+              </div>
+            </div>
           </div>
+        </div>
+        <div style="text-align: center;">
+          <img src="images/image-from-rawpixel-id-9058604-png-20231107045041-pe6an.png" alt="" srcset="" width="15%">
+          <br>
+          <p style="color: white;">Không gian trưng bày hơn 150 tác phẩm tiêu biểu</p>
         </div>
         <br>
-        <div style="text-align: center;color: rgb(255, 145, 77);">
-          <img src="images/image-from-rawpixel-id-9058604-png-20231107045041-pe6an.png" alt="" srcset="" width="15%">
-          <h2>GIGAMAIL</h2>
-
-          <p style="color: white;">Không chỉ được thưởng lãm hơn 300 kiệt tác nổi bật , du khách còn chạm đến hành trình trải nghiệm không gian nghệ thuật sống động được kiến tạo bởi công nghệ hiện đại</p>
-          <br>
-          <div class="qaz">
-            <img src="images/picture26-20231016095551-r7b91.jpg" alt="" srcset="" width="60%" class="imageslink">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
-        </div>
-        <div style="text-align: center;color: rgb(255, 145, 77);">
-          <img src="images/image-from-rawpixel-id-9058604-png-20231107045041-pe6an.png" alt="" srcset="" width="15%">
-          <h2>GIGAMAIL</h2>
-
-          <p style="color: white;">Giao thoa giữa vẻ đẹp cổ điển, kết hợp công nghệ tương tác đỉnh cao tạo nên kiệt tác nghệ thuật đa giác quan hoàn mỹ. Mỗi du khách khi đặt chân đến GIGIMAIL là chạm đến tâm hồn nghệ thuật chân phương để tận hưởng những “giây phút bình yên”</p>
-          <br>
-          <div class="qaz">
-            <iframe width="100%" height="500" src="https://www.youtube.com/embed/Ub7cW3TI19Y?rel=0&modestbranding=0&playsinline=1&controls=0&enablejsapi=1&origin=https://www.vangoghexpo.vn&autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="autoplay" allowfullscreen></iframe>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/20231208_184330jpg-20240224041813-xzj28.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="images/20231208_184330jpg-20240224041813-xzj28.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="images/20231208_184330jpg-20240224041813-xzj28.png" class="d-block w-100" alt="...">
+            </div>
           </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
+      </div>
+      <br>
+      <div style="text-align: center;color: rgb(255, 145, 77);">
+        <img src="images/image-from-rawpixel-id-9058604-png-20231107045041-pe6an.png" alt="" srcset="" width="15%">
+        <h2>GIGAMAIL</h2>
 
+        <p style="color: white;">Không chỉ được thưởng lãm hơn 300 kiệt tác nổi bật , du khách còn chạm đến hành trình trải nghiệm không gian nghệ thuật sống động được kiến tạo bởi công nghệ hiện đại</p>
+        <br>
+        <div class="qaz">
+          <img src="images/picture26-20231016095551-r7b91.jpg" alt="" srcset="" width="60%" class="imageslink">
+        </div>
+      </div>
+      <div style="text-align: center;color: rgb(255, 145, 77);">
+        <img src="images/image-from-rawpixel-id-9058604-png-20231107045041-pe6an.png" alt="" srcset="" width="15%">
+        <h2>GIGAMAIL</h2>
+
+        <p style="color: white;">Giao thoa giữa vẻ đẹp cổ điển, kết hợp công nghệ tương tác đỉnh cao tạo nên kiệt tác nghệ thuật đa giác quan hoàn mỹ. Mỗi du khách khi đặt chân đến GIGIMAIL là chạm đến tâm hồn nghệ thuật chân phương để tận hưởng những “giây phút bình yên”</p>
+        <br>
+        <div class="qaz">
+          <iframe width="100%" height="500" src="https://www.youtube.com/embed/Ub7cW3TI19Y?rel=0&modestbranding=0&playsinline=1&controls=0&enablejsapi=1&origin=https://www.vangoghexpo.vn&autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allow="autoplay" allowfullscreen></iframe>
+        </div>
       </div>
 
-
     </div>
-    <!-- <div class="row">
-        <div class="portfolioContainer">
-          <div class="gallary building nature green">
-            <img src="images/img1.png" alt="">
-            <div class="card-img-overlay">
-              <div class="top-buttons clearfix">
-                <a href="#"><span class="img-icon"><img src="images/share.png" alt="share icon" /></span> <span class="txt">Share Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/heart.png" alt="share icon" /></span> <span class="txt">190+ Likes</span></a>
-              </div>
-
-              <div class="top-buttons bottom-buttons clearfix">
-                <a href="#"><span class="txt">Contact Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/eye.png" alt="share icon" /></span>
-                  <span class="txt">Full View</span></a>
-              </div>
-            </div>
-
-          </div>
-          <div class="gallary center-img wedding">
-            <img src="images/img2.png" class="half-height" alt="">
-            <div class="card-img-overlay">
-              <div class="top-buttons clearfix">
-                <a href="#"><span class="img-icon"><img src="images/share.png" alt="share icon" /></span> <span class="txt">Share Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/heart.png" alt="share icon" /></span> <span class="txt">190+ Likes</span></a>
-              </div>
-
-              <div class="top-buttons bottom-buttons clearfix">
-                <a href="#"><span class="txt">Contact Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/eye.png" alt="share icon" /></span>
-                  <span class="txt">Full View</span></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallary building">
-
-            <img src="images/img4.png" alt="">
-            <div class="card-img-overlay">
-              <div class="top-buttons clearfix">
-                <a href="#"><span class="img-icon"><img src="images/share.png" alt="share icon" /></span> <span class="txt">Share Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/heart.png" alt="share icon" /></span> <span class="txt">190+ Likes</span></a>
-              </div>
-
-              <div class="top-buttons bottom-buttons clearfix">
-                <a href="#"><span class="txt">Contact Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/eye.png" alt="share icon" /></span>
-                  <span class="txt">Full View</span></a>
-              </div>
-            </div>
-          </div>
-          <div class="gallary center-img landscape nature">
-            <img src="images/img3.png" class="half-height" alt="">
-            <div class="card-img-overlay">
-              <div class="top-buttons clearfix">
-                <a href="#"><span class="img-icon"><img src="images/share.png" alt="share icon" /></span> <span class="txt">Share Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/heart.png" alt="share icon" /></span> <span class="txt">190+ Likes</span></a>
-              </div>
-
-              <div class="top-buttons bottom-buttons clearfix">
-                <a href="#"><span class="txt">Contact Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/eye.png" alt="share icon" /></span>
-                  <span class="txt">Full View</span></a>
-              </div>
-            </div>
-          </div>
-          <div class="gallary">
-            <img src="images/img5.png" alt="">
-            <div class="card-img-overlay">
-              <div class="top-buttons clearfix">
-                <a href="#"><span class="img-icon"><img src="images/share.png" alt="share icon" /></span> <span class="txt">Share Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/heart.png" alt="share icon" /></span> <span class="txt">190+ Likes</span></a>
-              </div>
-
-              <div class="top-buttons bottom-buttons clearfix">
-                <a href="#"><span class="txt">Contact Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/eye.png" alt="share icon" /></span>
-                  <span class="txt">Full View</span></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallary center-img landscape">
-            <img src="images/img6.png" alt="">
-            <div class="card-img-overlay">
-              <div class="top-buttons clearfix">
-                <a href="#"><span class="img-icon"><img src="images/share.png" alt="share icon" /></span> <span class="txt">Share Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/heart.png" alt="share icon" /></span> <span class="txt">190+ Likes</span></a>
-              </div>
-
-              <div class="top-buttons bottom-buttons clearfix">
-                <a href="#"><span class="txt">Contact Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/eye.png" alt="share icon" /></span>
-                  <span class="txt">Full View</span></a>
-              </div>
-            </div>
-          </div>
 
 
-          <div class="gallary building nature">
-            <img src="images/img7.png" alt="">
-            <div class="card-img-overlay">
-              <div class="top-buttons clearfix">
-                <a href="#"><span class="img-icon"><img src="images/share.png" alt="share icon" /></span> <span class="txt">Share Now</span></a>
+  </div>
 
-                <a href="#"><span class="img-icon"><img src="images/heart.png" alt="share icon" /></span> <span class="txt">190+ Likes</span></a>
-              </div>
-
-              <div class="top-buttons bottom-buttons clearfix">
-                <a href="#"><span class="txt">Contact Now</span></a>
-
-                <a href="#"><span class="img-icon"><img src="images/eye.png" alt="share icon" /></span>
-                  <span class="txt">Full View</span></a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div> -->
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -557,52 +600,15 @@
         alert('Bạn phải đồng ý với nội quy trước khi tham gia sự kiện.');
       }
     });
+    document.querySelectorAll('.uyt a').forEach(function(element) {
+      element.addEventListener('click', function(event) {
+        event.preventDefault(); // Ngăn không cho thẻ <a> chuyển hướng
+        document.getElementById('hiddenButton').click(); // Kích hoạt nút ẩn để mở modal
+      });
+    });
   </script>
   </div>
   <div class="container-fluid fh5co-news" id="news">
-    <div class="container">
-      
-      <!-- <div class="row">
-            <div class="owl-carousel owl-carousel2 owl-theme">
-              <div>
-                <div class="card text-center"> <img class="card-img-top" src="images/news1.png" alt="">
-                  <div class="card-body text-left pr-0 pl-0">
-                    <h5>How to take a Awosome photo Of
-                      Groups! </h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div class="card text-center"> <img class="card-img-top" src="images/news2.png" alt="">
-                  <div class="card-body text-left pr-0 pl-0">
-                    <h5>How to take a Awosome photo Of
-                      Groups! </h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div class="card text-center"> <img class="card-img-top" src="images/news3.png" alt="">
-                  <div class="card-body text-left pr-0 pl-0">
-                    <h5>How to take a Awosome photo Of
-                      Groups! </h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div> -->
-    </div>
   </div>
 
 
@@ -615,7 +621,7 @@
             If you are looking for a Photographer
           </p>
           <p>
-            <span class="email"><img  src="images/email.png" alt="email icon" /></span><b style="color: white;">contact@example.com</b>
+            <span class="email"><img src="images/email.png" alt="email icon" /></span><b style="color: white;">contact@example.com</b>
           </p>
           <p>
             <span class="phone"><img src="images/phone.png" alt="phone icon" /></span><b style="color: white">+123-456-7890</b>

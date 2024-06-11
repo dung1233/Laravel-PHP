@@ -25,10 +25,10 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
+    
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $user = Auth::user();
-
+    
             // Kiểm tra loại người dùng
             if ($user->UserType == 1) { // Nếu là admin
                 Auth::logout();
@@ -36,7 +36,7 @@ class LoginController extends Controller
                     'email' => 'Admins must log in from the admin login page.',
                 ]);
             }
-
+    
             return $this->authenticated($request, $user);
         } else {
             return back()->withErrors([
@@ -44,9 +44,13 @@ class LoginController extends Controller
             ]);
         }
     }
-
+    
     protected function authenticated(Request $request, $user)
     {
+
+        if ($user->UserType == 1) {
+            return redirect()->route('admin.dashboard');
+        }
         // Nếu là sinh viên
         if ($user->UserType == 2) {
             return redirect()->route('profile.student');
@@ -55,7 +59,7 @@ class LoginController extends Controller
         if ($user->UserType == 3) {
             return redirect()->route('profile.external');
         }
-
+    
         return redirect('/');
     }
     

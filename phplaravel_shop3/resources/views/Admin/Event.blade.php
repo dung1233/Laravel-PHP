@@ -18,7 +18,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css2/bootstrap.min.css">
     <link rel="stylesheet" href="css2/style.css">
-    <title>Photogenic - Free Portfolio Bootstrap Template</title>
+    <title>GIGIMAIL-Nghệ Thuật </title>
 </head>
 
 <body>
@@ -37,14 +37,14 @@
                         </ul>
                     </div>
                     <ul class="navbar-nav float-right menu-links">
-                        <li class="nav-item">
+                    <li class="nav-item">
                             <a class="nav-link " href="/">Trang Chủ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile.Event') }}">Event</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Mua vé</a>
+                            <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
                         </li>
                        
 
@@ -168,7 +168,7 @@
                 @endphp
                 <div class="ikm">
                     @if ($latestExhibition)
-                    <h1 style="color: white; font-size: 3rem;"><b>{{ $latestExhibition->Title }}</b></h1>
+                    <h1 style="color: orange; font-size: 3rem;"><b>{{ $latestExhibition->Title }}</b></h1>
                 </div>
                 <!-- <p>{{ $latestExhibition->Description }}</p> -->
                 <div class="details">

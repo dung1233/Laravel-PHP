@@ -48,8 +48,8 @@ aria-expanded="true" aria-controls="collapseUtilities">
 data-parent="#accordionSidebar">
 <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">Custom Utilities:</h6>
-    <a class="collapse-item" href="{{ route('admin.prices.index') }}">Chỉnh Giá Tham gia Triển lãm</a>
-    <a class="collapse-item" href="utilities-border.html">Other</a>
+    <a class="collapse-item" href="{{ route('admin.prices.index') }}">Giá Tham gia Triển lãm</a>
+    <a class="collapse-item" href="{{ route('xetduyet') }}">Xét duyệt bài</a>
 </div>
 </div>
 </li>
@@ -74,13 +74,13 @@ aria-expanded="true" aria-controls="collapsePages">
     <a class="collapse-item" href="forgot-password.html"></a>
     <div class="collapse-divider"></div>
     <h6 class="collapse-header">Quản lý :</h6>
-    <a class="collapse-item" href="404.html">Danh sách người mua</a>
+    <a class="collapse-item" href="{{ route('purchase.history') }}">Danh sách người mua</a>
 </div>
 </div>
 </li>
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-<a class="nav-link" href="charts.html">
+<a class="nav-link" href="{{ route('admin.chart') }}">
 <i class="fas fa-fw fa-chart-area"></i>
 <span>Charts</span></a>
 </li>

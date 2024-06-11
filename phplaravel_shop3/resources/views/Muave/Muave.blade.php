@@ -37,12 +37,12 @@
                             <a class="nav-link " href="/">Trang Chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('profile.Event') }}">Event</a>
+                            <a class="nav-link" href="{{ route('storeExhibition') }}">Event</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#contact">Mua vé</a>
                         </li>
-                       
+
                         @auth
                         @if(Auth::user()->UserType === 2)
                         <li class="nav-item">
@@ -110,65 +110,66 @@
     </div>
     <div class="container mt-5">
 
-    <div class="ticket-form">
-        <div class="sdfd">
-            <h2 class="text-center"><b>CHỌN NGÀY & GIỜ TRIỂN LÃM</b></h2>
-        </div>
+        <div class="ticket-form">
+            <div class="sdfd">
+                <h2 class="text-center"><b>CHỌN NGÀY & GIỜ TRIỂN LÃM</b></h2>
+            </div>
 
-        <form id="ticket-form" action="{{ route('tickets.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label><b>Ngày triển lãm:</b></label>
-                <div id="date-slots">
-                    <!-- Thêm ngày triển lãm ở đây -->
+            <form id="ticket-form" action="{{ route('tickets.store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label><b>Ngày triển lãm:</b></label>
+                    <div id="date-slots">
+                        <!-- Thêm ngày triển lãm ở đây -->
+                    </div>
+                    <input type="hidden" name="date" id="selected-date">
                 </div>
-                <input type="hidden" name="date" id="selected-date">
-            </div>
-            <div class="form-group">
-                <label><b>Khung giờ triển lãm:</b></label>
-                <div id="time-slots">
-                    <!-- Thêm khung giờ triển lãm ở đây -->
+                <div class="form-group">
+                    <label><b>Khung giờ triển lãm:</b></label>
+                    <div id="time-slots">
+                        <!-- Thêm khung giờ triển lãm ở đây -->
+                    </div>
+                    <input type="hidden" name="time" id="selected-time">
                 </div>
-                <input type="hidden" name="time" id="selected-time">
-            </div>
-            <div class="form-group">
-                <label for="quantity">Số lượng:</label>
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-secondary" id="quantity-minus">-</button>
-                    </span>
-                    <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-secondary" id="quantity-plus">+</button>
-                    </span>
+                <div class="form-group">
+                    <label for="quantity">Số lượng:</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary" id="quantity-minus">-</button>
+                        </span>
+                        <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary" id="quantity-plus">+</button>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="ticket_type">Loại vé:</label>
-                <select name="ticket_type" id="ticket_type" class="form-control">
-                    @foreach($prices as $price)
+                <div class="form-group">
+                    <label for="ticket_type">Loại vé:</label>
+                    <select name="ticket_type" id="ticket_type" class="form-control">
+                        @foreach($prices as $price)
                         <option value="{{ $price->id }}" data-price="{{ $price->price }}">{{ $price->ticket_type }} - {{ number_format($price->price, 0, ',', '.') }} VNĐ</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="price">Giá vé:</label>
-                <p id="ticket-price" class="price" style="color: black;"></p>
-            </div>
-            <div class="form-group">
-                <label for="total-price">Tổng giá:</label>
-                <p id="total-price" class="price" style="color: black;"></p>
-            </div>
-            <div class="cccf">
-                <div class="sdfg">
-                    <button type="submita" name="action" value="add-to-cart" class="btn btn-primary btn-block">THÊM VÀO GIỎ</button>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="sdfg">
-                    <button type="submita" name="action" value="buy-now" class="btn btn-secondary btn-block">MUA NGAY</button>
+                <div class="form-group">
+                    <label for="price">Giá vé:</label>
+                    <p id="ticket-price" class="price" style="color: black;"></p>
                 </div>
-            </div>
-        </form>
-    </div>
+                <div class="form-group">
+                    <label for="total-price">Tổng giá:</label>
+                    <p id="total-price" class="price" style="color: black;"></p>
+                </div>
+                <div class="cccf">
+                    <div class="sdfg">
+                        <button type="submita" name="action" value="add-to-cart" class="btn btn-primary btn-block">THÊM VÀO GIỎ</button>
+                    </div>
+                    <div class="sdfg">
+                        <button type="submita" name="action" value="buy-now" class="btn btn-secondary btn-block">MUA NGAY</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
 
         <div class="mnb">
             <img src="/images/event1.webp" alt="" srcset="" width="100%">
@@ -197,10 +198,10 @@
                         If you are looking for a Photographer
                     </p>
                     <p>
-                        <span class="email"><img src="images/email.png" alt="email icon" /></span><b>contact@example.com</b>
+                        <span class="email"><img src="/images/email.png" alt="email icon" /></span><b>contact@example.com</b>
                     </p>
                     <p>
-                        <span class="phone"><img src="images/phone.png" alt="phone icon" /></span><b>+123-456-7890</b>
+                        <span class="phone"><img src="/images/phone.png" alt="phone icon" /></span><b>+123-456-7890</b>
                     </p>
                     <h3>We Are Social:</h3>
                     <ul class="navbar-nav float-left social-links footer-social">
@@ -251,20 +252,15 @@
             </div>
         </div>
     </footer>
-    <div class="container-fluid copy">
-        <div class="col-lg-12">
-            <p>&copy; 2018 Photogenic. All rights Reserved. Design by <a href="https://freehtml5.co" target="_blank">FreeHTML5.co</a>.</p>
-        </div>
-    </div>
+
     <script>
         $(document).ready(function() {
             // Chọn ngày triển lãm
             const dates = [
-                '2024-06-03', '2024-06-04', '2024-06-05', 
-                '2024-06-06', '2024-06-07', '2024-06-08',
-                '2024-06-09', '2024-06-10', '2024-06-11',
+
+                '2024-06-11',
                 '2024-06-12', '2024-06-13', '2024-06-14',
-                '2024-06-15', '2024-06-16'
+                '2024-06-15', '2024-06-16', '2024-06-17', '2024-06-18', '2024-06-19'
             ];
             const dateSlots = $('#date-slots');
             dates.forEach(date => {
@@ -283,7 +279,7 @@
 
             // Chọn khung giờ triển lãm
             const times = [
-                '10:00-12:00', '12:00-14:00', '14:00-16:00', 
+                '10:00-12:00', '12:00-14:00', '14:00-16:00',
                 '16:00-18:00', '18:00-20:00', '20:00-22:00'
             ];
             const timeSlots = $('#time-slots');
@@ -308,8 +304,14 @@
                 const price = parseFloat(selectedOption.data('price'));
                 const totalPrice = quantity * price;
 
-                $('#ticket-price').text(price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
-                $('#total-price').text(totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
+                $('#ticket-price').text(price.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }));
+                $('#total-price').text(totalPrice.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }));
             }
 
             // Cập nhật giá vé khi chọn loại vé

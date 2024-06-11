@@ -34,7 +34,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user" action="/create/store" method="POST">
+                            <form class="user" action="/create/store" method="POST" >
                                 @csrf
                                 @if($errors->any())
                                         <div class="alert alert-danger">

@@ -16,12 +16,13 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\App;
-
+use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\PurchaseHistoryController;
 //login 
 Route::get('login', [LoginController::class, 'index'])->name('login');
 
 
-Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/', [EventController::class, 'indexbas'])->name('home');
 Route::post('admin/user/login/store', [LoginController::class, 'store']);
 
 Route::get('/student/store/success', function () {
@@ -46,7 +47,12 @@ Route::get('/profile', 'ProfileController@index')->name('profile')->middleware('
 Route::get('/student/dangbai', function () {
     return view('student.chucnang.dangbai');
 })->name('edit');
+
+//trang Event
 Route::get('/student/sukien',[EventController::class, 'createExhibitionEntry'])->name('sukien');
+
+
+
 Route::get('/external', function () {
     return view('other.other');
 })->name('external');
@@ -66,6 +72,10 @@ Route::prefix('login')->group(function () {
 
 Route::get('/login/admin', [AdminloginController::class, 'index'])->name('login.admin');
 Route::post('/admin/login/store', [AdminloginController::class, 'store']);
+route::get('/admin/chart',[AdminController::class, 'chart'])->name('admin.chart');
+Route::get('/chart-data', [AdminController::class, 'getChartData']);
+
+
 Route::get('/detail', [ProductController::class, 'detail'])->name('product.detail');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/profile/student',[ProductController::class, 'showStudentPage']);
@@ -100,14 +110,29 @@ Route::get('/event/edit/{id}', [EventController::class, 'edit'])->name('event.ed
 Route::put('/event/update/{id}', [EventController::class, 'update'])->name('event.update');
 Route::delete('/event/destroy/{id}', [EventController::class, 'destroy'])->name('event.destroy');
 Route::get('/admin/history', [EventController::class, 'Eventhistory'])->name('admin.history');
+Route::get('/admin/xetduyet',[AdminController::class,'xetduyet'])->name('xetduyet');
 
 Route::delete('/admin/event/destroy/{id}', [EventController::class, 'destroyForAdmin'])->name('admin.event.destroy');
+Route::get('/prices', [PriceController::class, 'index'])->name('admin.prices.index');
+Route::put('/prices/update', [PriceController::class, 'update'])->name('admin.prices.update');
+Route::resource('events', EventController::class);
+Route::get('events/{event}/winners
+', [EventController::class, 'calculateWinners'])->name('events.winners');
+
+
+Route::get('/paypal', function () {
+    return view('paypal');
+})->name('paypal');
+
+Route::post('paypal', [PaypalController::class, 'paypala'])->name('paypala');
+Route::get('success', [PaypalController::class, 'success'])->name('success');
+Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
+
 
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets.store');
 Route::get('/get-ticket-price', [TicketController::class, 'getTicketPrice'])->name('get-ticket-price');
-Route::get('/prices', [PriceController::class, 'index'])->name('admin.prices.index');
-Route::put('/prices/update', [PriceController::class, 'update'])->name('admin.prices.update');
+
 
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
 Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets.store');
@@ -115,3 +140,12 @@ Route::get('/tickets/success', [TicketController::class, 'success'])->name('tick
 
 Route::get('/tickets/cart', [TicketController::class, 'cart'])->name('tickets.cart');
 Route::delete('/tickets/cart/{index}', [TicketController::class, 'removeFromCart'])->name('tickets.cart.remove');
+
+
+Route::post('checkout', [TicketController::class, 'processCheckout'])->name('checkout.process');
+Route::post('payment-methods', [TicketController::class, 'processPayment'])->name('payment.process');
+Route::post('/process-payment', [TicketController::class, 'processPayment'])->name('tickets.processPayment');
+
+
+
+Route::get('/purchase-history', [PurchaseHistoryController::class, 'index'])->name('purchase.history');

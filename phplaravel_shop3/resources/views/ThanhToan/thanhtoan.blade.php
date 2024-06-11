@@ -157,6 +157,66 @@
         margin-top: 20px;
         color: #777;
     }
+
+    .order-summary {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-summary h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .list-group-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+    .img-thumbnail {
+        border-radius: 5px;
+        margin-right: 20px;
+    }
+
+    .btn-danger {
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 5px;
+    }
+
+    .total-price {
+        font-weight: bold;
+        font-size: 16px;
+        color: #ff5722;
+    }
+
+    @media (max-width: 768px) {
+        .list-group-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .img-thumbnail {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn-danger {
+            width: 100%;
+            text-align: center;
+        }
+    }
 </style>
 
 <body>
@@ -173,8 +233,9 @@
         <div class="checkout-content">
             <div class="billing-info">
                 <h2>Thông tin thanh toán</h2>
-                <p>Bạn đã có tài khoản? <a href="#">Đăng nhập</a></p>
-                <form>
+
+                <form action="{{ route('checkout.process') }}" method="POST">
+                    @csrf
                     <label for="name">Họ và tên</label>
                     <input type="text" id="name" name="name" required>
 
@@ -207,47 +268,49 @@
 
             <div class="order-summary">
                 <h2>Giỏ hàng</h2>
-
-                @forelse ($cart as $index => $item)
-                <div class="item">
-                    <img src="/images/event1.webp" alt="Special Ticket" width="40%">
-                    <div class="item-info">
-                        <p>{{ $item['ticket_type'] }}</p>
-                        <p>{{ $item['date'] }} / {{ $item['time'] }}</p>
-                    </div>
-                    <p class="price">{{ number_format($item['total_price'], 0, ',', '.') }} VNĐ x {{ $item['quantity'] }}</p>
-
-                    <form action="{{ route('tickets.cart.remove', $index) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                    </form>
-                </div>
-                @empty
-                <p class="list-group-item">Giỏ hàng trống</p>
-                @endforelse
-                <div class="discount-code">
-                    <input type="text" placeholder="Mã giảm giá">
-                    <button type="button">Sử dụng</button>
-                </div>
-                <div class="total">
-                    <span>Tổng thành tiền</span>
-                    <strong class="total-price">
-                        @php
-                        $total = array_reduce($cart, function($carry, $item) {
-                        return $carry + ($item['total_price'] * $item['quantity']);
-                        }, 0);
-                        echo number_format($total, 0, ',', '.') . ' VNĐ';
-                        @endphp
-                    </strong>
-
-                </div>
+                <ul class="list-group mb-3">
+                    @forelse ($cart as $index => $item)
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <img src="/images/event1.webp" alt="Loại vé" class="img-thumbnail" style="width: 15%;">
+                            <div class="ms-3">
+                                <h6 class="my-0">Loại Vé: {{ $item['name'] }}</h6>
+                                <small class="text-muted">{{ number_format($item['total_price'], 0, ',', '.') }} VNĐ x {{ $item['quantity'] }}</small>
+                                <p class="text-muted">Ngày triển lãm: {{ $item['date'] }}</p>
+                                <p class="text-muted">Khung giờ: {{ $item['time'] }}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <form action="{{ route('tickets.cart.remove', $index) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                            </form>
+                        </div>
+                    </li>
+                    @empty
+                    <li class="list-group-item">Giỏ hàng trống</li>
+                    @endforelse
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Tổng thành tiền</span>
+                        <strong class="total-price">
+                            {{ number_format($total, 0, ',', '.') }} VNĐ
+                        </strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Tổng thành tiền (USD)</span>
+                        <strong class="total-price">
+                            ${{ number_format($totalUSD, 2, '.', ',') }}
+                        </strong>
+                    </li>
+                </ul>
             </div>
-
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
             // Dữ liệu các tỉnh và quận/huyện
             var data = {
                 "Hà Nội": ["Ba Đình", "Hoàn Kiếm", "Tây Hồ", "Long Biên", "Cầu Giấy", "Đống Đa", "Hai Bà Trưng", "Hoàng Mai", "Thanh Xuân"],
@@ -273,7 +336,7 @@
                 }
             });
         });
-        </script>
+    </script>
 </body>
 
 

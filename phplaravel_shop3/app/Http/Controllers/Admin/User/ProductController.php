@@ -62,19 +62,17 @@ class ProductController extends Controller
         return view('Note');
     }
 
-   public function index()
+    public function index()
     {
         $exhibitions = Event::all();
         $products = Product::all();
         $electronics = Product::where('product_type', 'Electronics')->get();
         $oilpainting = Product::where('product_type', 'Oilpainting')->get();
-        $entries = ExhibitionEntry::all();
-        $entries = ExhibitionEntry::with('user', 'exhibition')->get();
-
-      
-
-        return view('Trangchu.Trangchu', compact('products', 'electronics', 'oilpainting', 'entries','exhibitions'));
+        $entries = ExhibitionEntry::with('user', 'exhibition')->get(); // Lấy tất cả các bài đăng cùng với thông tin người dùng và sự kiện
+    
+        return view('Trangchu.Trangchu', compact('products', 'electronics', 'oilpainting', 'entries', 'exhibitions'));
     }
+    
     public function history()
     {
         $user = Auth::user(); // Lấy thông tin người dùng hiện tại

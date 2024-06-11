@@ -21,7 +21,7 @@
     <div id="fh5co-hero-carousel" class="carousel slide header" data-ride="carousel">
         <nav class="navbar fixed-top navbar-expand-xl">
             <div class="container">
-                <a class="navbar-brand mobile-logo" href="#"><img src="images/logo.png" alt="Vista Pro" /></a>
+                <a class="navbar-brand mobile-logo" href="#"><img src="images/home1.jpg" alt="Vista Pro" /></a>
                 <button class="navbar-toggler" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse">
                     <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span> </button>
                 <div id="my-nav" class="collapse navbar-collapse">
@@ -37,16 +37,10 @@
                             <a class="nav-link " href="/">Trang Chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about-us">Giới Thiệu</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('profile.Event') }}">Event</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Mua vé</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#news">News</a>
+                            <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
                         </li>
 
                         @auth
@@ -84,30 +78,17 @@
         </nav>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100 home-bg" alt="home-bg" src="/images/event1.webp">
-                <div class="carousel-caption d-md-block">
-                    <p class="frst-hrd">Everyone is Photogenic</p>
-                    <h5>Today’s SPECIAL MOMENTS.</h5>
-                    <p>Creating a timeless look, coupled with a flawless moment</p>
-                </div>
+                <img class="d-block w-100 home-bg" alt="home-bg" src="/images/home1.jpg">
+
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100 home-bg" alt="home-bg" src="/images/event.webp">
-                <div class="carousel-caption d-md-block">
-                    <p class="frst-hrd">Everyone is Photogenic</p>
-                    <h5>Today’s SPECIAL MOMENTS.</h5>
-                    <p>Creating a timeless look, coupled with a flawless moment</p>
-                </div>
+
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100 home-bg" alt="home-bg" src="/images/home-bg.png">
 
-                <div class="carousel-caption d-md-block">
-                    <p class="frst-hrd">Everyone is Photogenic</p>
-                    <h5>Today’s SPECIAL MOMENTS.</h5>
-                    <p>Creating a timeless look, coupled with a flawless moment</p>
 
-                </div>
             </div>
 
         </div>
@@ -118,31 +99,28 @@
         <div class="container">
             <div class="row artwork-card">
                 <div class="col-md-4 artist-info">
-                    <h3>Tên Tranh
-                        <br>
-                        {{ $entry->name }}
-                    </h3>
-                    <p>
-                        {{ $entry->user->name }}
-                    </p>
-                    <p> {{ $entry->user->PhoneNumber }}</p>
-                    <p>{{ $entry->user->email }}</p>
-                    <p>{{ $entry->user->StudentCode }}</p>
+                    <h3 class="painting-title">{{ $entry->name }}</h3>
+                    <p class="artist-name">Tên:{{$entry->user->name }}</p>
+                    <p class="artist-phone">SĐT:{{$entry->user->PhoneNumber}}</p>
+                    <p class="artist-email">Email:{{$entry->user->email }}</p>
+                    <p class="artist-code">{{$entry->user->StudentCode }}</p>
                     <br>
-                    <div>
+                    <div class="hs">
                         <a href="#" class="like-button" data-id="{{ $entry->id }}" data-liked="{{ $entry->likes->where('user_id', Auth::id())->count() > 0 ? 'true' : 'false' }}">
-                            <span class="img-icon"><img src="{{ asset('images/heart.png') }}" class="{{ $entry->likes->where('user_id', Auth::id())->count() > 0 ? 'liked' : '' }}" alt="heart icon" /></span>
+                            <span class="img-icon">
+                                <img src="{{ asset('images/heart.png') }}" class="{{ $entry->likes->where('user_id', Auth::id())->count() > 0 ? 'liked' : '' }}" alt="heart icon" />
+                            </span>
                             <span class="txt">{{ $entry->likes->count() }} Likes</span>
                         </a>
                     </div>
-
                 </div>
-                <div class="col-md-8 artwork-image">
+                <div class="col-md-8 artwork-image" style="text-align: center;max-width: 60%;">
 
                     <img src="{{ asset($entry->image_path) }}" alt="{{ $entry->name }}">
                 </div>
             </div>
             <div class="row artwork-card comments">
+                @if($isOngoing)
                 <div class="col-md-12">
                     <h4>Bình luận của người xem</h4>
                     <form action="{{ route('entries.comment', $entry->id) }}" method="POST">
@@ -151,9 +129,14 @@
                             <label for="comment">Thêm bình luận:</label>
                             <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
                         </div>
-                        <button type="submitss" class="btn btn-primary">Gửi bình luận</button>
+                        <button type="submit" class="btn btn-primary">Gửi bình luận</button>
                     </form>
                     <hr>
+                </div>
+                @else
+                <p>Sự kiện đã kết thúc, không thể bình luận bài đăng này.</p>
+                @endif
+                <div class="comments-list">
                     @foreach($entry->comments as $comment)
                     <div class="comment mb-3">
                         <p><strong>{{ $comment->user->name }}</strong> {{ $comment->created_at->format('d/m/Y H:i') }}</p>
@@ -161,11 +144,14 @@
                     </div>
                     <hr>
                     @endforeach
-
                 </div>
-
             </div>
+
+
         </div>
+
+    </div>
+    </div>
     </div>
     </div>
 
@@ -181,10 +167,10 @@
                         If you are looking for a Photographer
                     </p>
                     <p>
-                        <span class="email"><img src="images/email.png" alt="email icon" /></span><b style="color: white;">contact@example.com</b>
+                        <span class="email"><img src="/images/email.png" alt="email icon" /></span><b style="color: white;">contact@example.com</b>
                     </p>
                     <p>
-                        <span class="phone"><img src="images/phone.png" alt="phone icon" /></span><b style="color: white;">+123-456-7890</b>
+                        <span class="phone"><img src="/images/phone.png" alt="phone icon" /></span><b style="color: white;">+123-456-7890</b>
                     </p>
                     <h3 style="color: white;">We Are Social:</h3>
                     <ul class="navbar-nav float-left social-links footer-social">
@@ -235,11 +221,7 @@
             </div>
         </div>
     </footer>
-    <div class="container-fluid copy">
-        <div class="col-lg-12">
-            <p>&copy; 2018 Photogenic. All rights Reserved. Design by <a href="https://freehtml5.co" target="_blank">FreeHTML5.co</a>.</p>
-        </div>
-    </div>
+
     <script>
         $(document).ready(function() {
             $('.like-button').click(function(e) {

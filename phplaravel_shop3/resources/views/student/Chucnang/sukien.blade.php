@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css2/style.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Photogenic - Free Portfolio Bootstrap Template</title>
+    <title>Event</title>
 </head>
 
 <body>
@@ -36,18 +36,14 @@
                         <li class="nav-item">
                             <a class="nav-link " href="/">Trang Chủ</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="#about-us">Giới Thiệu</a>
+                            <a class="nav-link" href="{{ route('storeExhibition') }}">Event</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('profile.Event') }}">Event</a>
+                            <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">Mua vé</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#news">News</a>
-                        </li>
+
 
                         @auth
                         @if(Auth::user()->UserType === 2)
@@ -125,10 +121,9 @@
         <div class="bigtail">
             <div class="contraiks">
                 <div class="imageso">
-                    <img src="/images/section_ticket_image_url_1-20240518042521-zu0yc.jpg" alt="" srcset="" width="100%">
+                    <img src="/images/image.jpg" alt="" srcset="" width="100%">
                 </div>
-
-                <div>
+                <div style="margin: 10px;">
                     <br>
                     <h2 style="font-size: 1.25rem; color: rgb(255, 145, 77)"><b>{{ $latestExhibition->Title }}</b>
 
@@ -201,10 +196,10 @@
                         If you are looking for a Photographer
                     </p>
                     <p>
-                        <span class="email"><img src="images/email.png" alt="email icon" /></span><b>contact@example.com</b>
+                        <span class="email"><img src="/images/email.png" alt="email icon" /></span><b>contact@example.com</b>
                     </p>
                     <p>
-                        <span class="phone"><img src="images/phone.png" alt="phone icon" /></span><b>+123-456-7890</b>
+                        <span class="phone"><img src="/images/phone.png" alt="phone icon" /></span><b>+123-456-7890</b>
                     </p>
                     <h3>We Are Social:</h3>
                     <ul class="navbar-nav float-left social-links footer-social">
@@ -220,7 +215,6 @@
 
                     </ul>
                 </div>
-
                 <div class="col-lg-7">
                     <div class="form-box">
                         <h4>What would you like to talk about</h4>
@@ -255,11 +249,6 @@
             </div>
         </div>
     </footer>
-    <div class="container-fluid copy">
-        <div class="col-lg-12">
-            <p>&copy; 2018 Photogenic. All rights Reserved. Design by <a href="https://freehtml5.co" target="_blank">FreeHTML5.co</a>.</p>
-        </div>
-    </div>
     <script>
         $(document).ready(function() {
             $('.like-button').click(function(e) {

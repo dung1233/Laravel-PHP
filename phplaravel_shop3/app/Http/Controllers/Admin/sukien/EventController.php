@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\ExhibitionEntry;
-use App\Models\Notification;
+use App\Models\Exhibition;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use Carbon\Carbon;
+
 
 class EventController extends Controller
 {
@@ -26,6 +28,7 @@ class EventController extends Controller
         $event->StartDate = $request->start_time; // Đảm bảo tên trường phù hợp
         $event->EndDate = $request->end_time; // Đảm bảo tên trường phù hợp
         $event->Location = $request->location; // Thêm trường này nếu bạn đã thêm vào form và muốn lưu
+        
         $event->save();
 
         if ($event) {
@@ -42,26 +45,27 @@ class EventController extends Controller
         $events = Event::orderBy('StartDate', 'desc')->get(); // Sắp xếp các sự kiện theo ngày bắt đầu từ mới nhất đến cũ nhất
         return view('events.history', compact('events')); // Truyền danh sách sự kiện đến view 'history'
     }
-    public function indexa()
-    {
-
-        $exhibitions = Event::all();
-        $entries = ExhibitionEntry::all();
-
-        return view('Trangchu.Trangchu', compact('exhibitions', 'entries'));
-    }
 
     public function storeExhibition(Request $request)
     {
         if (!Auth::check()) {
             return redirect()->route('login')->with('alert', 'Bạn phải đăng nhập để tham gia sự kiện.');
         }
+
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'exhibition_id' => 'required|exists:exhibitions,ExhibitionID', // Đảm bảo sự kiện tồn tại
         ]);
+
+        // Lấy sự kiện mà thí sinh đang tham gia
+        $event = Event::findOrFail($request->exhibition_id);
+
+        // Kiểm tra nếu sự kiện đã kết thúc
+        if (Carbon::now()->greaterThan(Carbon::parse($event->EndDate))) {
+            return redirect()->route('note')->with('error', 'Sự kiện đã kết thúc!');
+        }
 
         $imagePath = null;
 
@@ -165,7 +169,25 @@ class EventController extends Controller
     public function showa($id)
     {
         $entry = ExhibitionEntry::with('comments.user')->findOrFail($id);
-        return view('detail', compact('entry'));
+        $currentDateTime = Carbon::now();
+        $event = Event::orderBy('EndDate', 'desc')->first();
+
+        if ($event) {
+            $entries = ExhibitionEntry::where('exhibition_id', $event->ExhibitionID)
+                ->withCount('likes')
+                ->orderBy('likes_count', 'desc')
+                ->take(3)
+                ->get();
+            $isOngoing = $currentDateTime->lessThan($event->EndDate);
+        } else {
+            $entries = collect();
+            $isOngoing = false;
+        }
+
+        $exhibitions = Event::all();
+
+
+        return view('detail', compact('entry','event', 'entries', 'exhibitions', 'isOngoing'));
     }
 
     public function storeComment(Request $request, $id)
@@ -174,12 +196,57 @@ class EventController extends Controller
             'comment' => 'required|string|max:255',
         ]);
 
+        $entry = ExhibitionEntry::findOrFail($id);
+        $event = Event::findOrFail($entry->exhibition_id);
+
+        if (Carbon::now()->greaterThan(Carbon::parse($event->EndDate))) {
+            return redirect()->back()->with('alert', 'Sự kiện đã kết thúc, không thể bình luận bài đăng này.');
+        }
+
         Comment::create([
             'exhibition_entry_id' => $id,
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'comment' => $request->input('comment'),
         ]);
 
         return redirect()->route('entries.show', $id)->with('success', 'Bình luận đã được thêm.');
+    }
+    public function calculateWinners(Event $event)
+    {
+        $currentDateTime = Carbon::now();
+
+        if ($currentDateTime->lessThan($event->EndDate)) {
+            return redirect()->back()->with('error', 'Sự kiện chưa kết thúc!');
+        }
+
+        $entries = ExhibitionEntry::where('exhibition_id', $event->ExhibitionID)
+            ->withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('Trangchu.Trangchu', compact('event', 'entries'));
+    }
+
+    public function indexbas()
+    {
+        $currentDateTime = Carbon::now();
+        $event = Event::orderBy('EndDate', 'desc')->first();
+
+        if ($event) {
+            $entries = ExhibitionEntry::where('exhibition_id', $event->ExhibitionID)
+                ->withCount('likes')
+                ->orderBy('likes_count', 'desc')
+                ->take(3)
+                ->get();
+            $isOngoing = $currentDateTime->lessThan($event->EndDate);
+        } else {
+            $entries = collect();
+            $isOngoing = false;
+        }
+
+        $exhibitions = Event::all();
+
+        return view('Trangchu.Trangchu', compact('event', 'entries', 'exhibitions', 'isOngoing'));
     }
 }

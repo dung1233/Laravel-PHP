@@ -363,38 +363,56 @@
                         </div>
 
                         <!-- Content Row -->
-                        <div class="container mt-5">
-                            <h1>Quản lý giá vé</h1>
-                            <form action="{{ route('admin.prices.update') }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Loại vé</th>
-                                            <th>Giá vé (VNĐ)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if($prices && count($prices) > 0)
-                                        @foreach ($prices as $price)
-                                        <tr>
-                                            <td>{{ $price->ticket_type }}</td>
-                                            <td>
-                                                <input type="number" name="prices[{{ $price->id }}]" value="{{ $price->price }}" class="form-control">
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                        @else
-                                        <tr>
-                                            <td colspan="2">Không có giá vé nào được tìm thấy.</td>
-                                        </tr>
-                                        @endif
-                                    </tbody>
-                                </table>
-                                <button type="submit" class="btn btn-primary">Cập nhật giá vé</button>
-                            </form>
+                        <div class="kkls" style="
+    display: flex;">
+                            <div class="container mt-5">
+                                <h1>Quản lý giá vé</h1>
+                                <form action="{{ route('admin.prices.update') }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <table class="tables table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Loại vé</th>
+                                                <th>Giá vé (VNĐ)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if($prices && count($prices) > 0)
+                                            @foreach ($prices as $price)
+                                            <tr>
+                                                <td>{{ $price->ticket_type }}</td>
+                                                <td>
+                                                    <input type="number" name="prices[{{ $price->id }}]" value="{{ $price->price }}" class="form-control">
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @else
+                                            <tr>
+                                                <td colspan="2">Không có giá vé nào được tìm thấy.</td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" class="btn btn-primary">Cập nhật giá vé</button>
+                                </form>
+                            </div>
+                            <div class="mnb">
+                                <img src="/images/event1.webp" alt="" srcset="" width="100%">
+                                <h2 style="color: yellow;">TICKET</h2>
+                                <p>Thông tin vé:</p>
+                                <br>
+                                <p>- 01 Lượt tham quan, trải nghiệm không gian triển lãm trong 120 phút</p>
+                                <br>
+                                <p>Đối tượng áp dụng:</p>
+                                <br>
+
+                                <p>- Khách hàng dưới 22 tuổi và có thẻ học sinh, sinh viên</p>
+                                <p>- Khách hàng trên 65 tuổi và có CCCD kèm theo</p>
+                            </div>
+
                         </div>
+
 
 
                     </div>
