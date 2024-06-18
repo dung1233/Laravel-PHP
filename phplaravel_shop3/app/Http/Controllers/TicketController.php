@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 namespace App\Http\Controllers;
-
+use App\Notifications\TicketPurchased;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\Price;
@@ -34,10 +34,12 @@ class TicketController extends Controller
         $price = Price::find($request->ticket_type);
         $totalPrice = $price->price * $request->quantity;
 
+        $ticketName = "VIP Ticket";
+
         $ticketData = [
             'user_id' => Auth::id(),
             'ticket_type' => $price->ticket_type,
-            'name' => $price->ticket_type,
+            'name' => $ticketName, // Sử dụng tên tùy chỉnh
             'quantity' => $request->quantity,
             'total_price' => $totalPrice,
             'date' => $request->date,
@@ -134,10 +136,30 @@ class TicketController extends Controller
 
 
         $request->session()->put('billing_info', $request->all());
+        foreach ($cart as $ticketData) {
+            // Gửi thông báo cho người dùng
+            Auth::user()->notify(new TicketPurchased($ticketData));
+        }
 
 
         return view('paypal', compact('cart', 'totalPrice', 'totalQuantity', 'total', 'totalUSD'));
     }
+    public function cancelPurchase(Request $request, $index)
+{
+    $cart = session()->get('cart', []);
+    if (isset($cart[$index])) {
+        $ticketData = $cart[$index];
+        unset($cart[$index]);
+        session()->put('cart', array_values($cart)); // Reset keys after removing item
+
+        // Gửi thông báo hủy mua hàng cho người dùng
+        Auth::user()->notify(new TicketPurchased($ticketData));
+
+        return redirect()->route('tickets.cart')->with('success', 'Bạn đã hủy đơn hàng vé thành công.');
+    }
+
+    return redirect()->route('tickets.cart')->with('error', 'Không thể hủy đơn hàng vé.');
+}
     public function processPayment(Request $request)
     {
         // Xử lý thanh toán PayPal hoặc các phương thức thanh toán khác ở đây

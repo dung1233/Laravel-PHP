@@ -870,7 +870,7 @@ footer.fh5co-footer .social-links li a {
   background-color: white;
   box-shadow: 0px 29px 57px 0px rgba(22, 20, 24, 0.06);
   padding: 30px;
-  height: 550px;
+  height: 650px;
   width: 700px;
 }
 .form-box h4 {
@@ -1004,7 +1004,7 @@ img.card-img-top {
 .ikn {
   display: flex;
   TEXT-ALIGN: center;
-  MARGIN-TOP: 20PX;
+  MARGIN-TOP: 55PX;
 }
 .ikb {
   width: 25%;
@@ -1019,7 +1019,8 @@ img.card-img-top {
   display: flex;
   /* width: 100%; */
   justify-content: space-evenly;
-  padding: 20px;
+  padding: 25px;
+  margin-top: 28px;
 }
 .tree {
   text-align: center;
@@ -1051,7 +1052,7 @@ img.imageslink {
 }
 .axca {
   width: 50%;
-  padding: 70px;
+  padding: 0px 50px 0px 55px;
   color: #ff914d;
 }
 .bigtail {
@@ -1102,7 +1103,7 @@ form.fomrss {
 }
 
 .form-group textarea {
-  height: 120px; /* Tăng chiều cao của textarea */
+  height: 50px; /* Tăng chiều cao của textarea */
   resize: vertical;
 }
 
@@ -1358,6 +1359,68 @@ img.imgah {
   font-weight: bold; /* Đậm chữ trong nút */
   transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
 }
+.container-fluid {
+  BACKGROUND-COLOR: BLACK;
+}
+img.d-block.w-100.home-bg {
+  opacity: 0.4;
+}
+@media (max-width: 768px) {
+  .opw{
+    width: 100%;
+  }
+  .opp{
+    width: 100%;
+  }
+  
+  .ikn{
+    width: 100%;
+  }
+  .ikb{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+  .ikb img {
+    width: 25%;
+  }
+  .ikb b {
+    font-size: 11px;
+  }
+  .yui{
+    width: 100%;
+    padding: 10px;
+  }
+  .tgh{
+    width: 50%;
+    display: contents;
+  }
+  .trs{
+    width: 100%;
+  }
+  .col-lg-7 .form-box{
+    width: 100%;
+  }
+  .col-lg-7{
+    width: 100%;
+  }
+  .container.mt-5 {
+    display: flex;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+.mnb{
+  width: 100%;
+}
+.row{
+  display: contents;
+}
+ 
+
+  }
+
+  
 
 
 

@@ -21,14 +21,14 @@
     <div id="fh5co-hero-carousel" class="carousel slide header" data-ride="carousel">
         <nav class="navbar fixed-top navbar-expand-xl">
             <div class="container">
-                <a class="navbar-brand mobile-logo" href="#"><img src="images/logo.png" alt="Vista Pro" /></a>
+                <a class="navbar-brand mobile-logo" href="#"><img src="/images/logo.png" alt="Vista Pro" /></a>
                 <button class="navbar-toggler" data-target="#my-nav" onclick="myFunction(this)" data-toggle="collapse">
                     <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span> </button>
                 <div id="my-nav" class="collapse navbar-collapse">
                     <div>
                         <ul class="navbar-nav mx-auto logo-desktop">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#"><img src="/images/logo.png" alt="Vista Pro" /></a>
+                            <a class="nav-link" href="#"><img src="/images/GIGAMAIL.png" alt="Vista Pro" style="width: 25%" /></a>
                             </li>
                         </ul>
                     </div>
@@ -37,11 +37,12 @@
                             <a class="nav-link " href="/">Trang Chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('storeExhibition') }}">Event</a>
+                            <a class="nav-link" href="{{ route('profile.Event') }}">Sự Kiện</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Mua vé</a>
+                            <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
                         </li>
+
 
                         @auth
                         @if(Auth::user()->UserType === 2)
@@ -198,21 +199,21 @@
                         If you are looking for a Photographer
                     </p>
                     <p>
-                        <span class="email"><img src="/images/email.png" alt="email icon" /></span><b>contact@example.com</b>
+                        <span class="email"><img src="/images/email.png" alt="email icon" /></span><b style="color: white;">contact@example.com</b>
                     </p>
                     <p>
-                        <span class="phone"><img src="/images/phone.png" alt="phone icon" /></span><b>+123-456-7890</b>
+                        <span class="phone"><img src="/images/phone.png" alt="phone icon" /></span><b style="color: white">+123-456-7890</b>
                     </p>
-                    <h3>We Are Social:</h3>
+                    <h3 style="color: white">We Are Social:</h3>
                     <ul class="navbar-nav float-left social-links footer-social">
                         <li class="nav-item">
-                            <a class="nav-link" href="https://www.facebook.com/fh5co"><i class="fab fa-facebook-f"></i></a>
+                            <a class="nav-link" href="https://www.facebook.com/fh5co"><i style="color: white" class="fab fa-facebook-f"></i></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <li class="nav-item"><a class="nav-link" href="#"><i style="color: white" class="fab fa-pinterest-p"></i></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="https://twitter.com/fh5co"><i class="fab fa-twitter"></i></a>
+                        <li class="nav-item"><a class="nav-link" href="https://twitter.com/fh5co"><i style="color: white" class="fab fa-twitter"></i></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-google-plus-g"></i></a>
+                        <li class="nav-item"><a class="nav-link" href="#"><i style="color: white" class="fab fa-google-plus-g"></i></a>
                         </li>
 
                     </ul>
@@ -257,10 +258,9 @@
         $(document).ready(function() {
             // Chọn ngày triển lãm
             const dates = [
-
-                '2024-06-11',
-                '2024-06-12', '2024-06-13', '2024-06-14',
-                '2024-06-15', '2024-06-16', '2024-06-17', '2024-06-18', '2024-06-19'
+                '2024-06-18',
+                '2024-06-19', '2024-06-20', '2024-06-21',
+                '2024-06-22', '2024-06-23', '2024-06-24', '2024-06-25', '2024-06-26'
             ];
             const dateSlots = $('#date-slots');
             dates.forEach(date => {
@@ -341,11 +341,11 @@
     </script>
 
 
-    <script src="js2/jquery.min.js"></script>
-    <script src="js2/bootstrap.min.js"></script>
-    <script src="owl-carousel/owl.carousel.min.js"></script>
-    <script src="js2/isotope-docs.min.js?6"></script>
-    <script src="js2/main.js"></script>
+    <script src="/js2/jquery.min.js"></script>
+    <script src="/js2/bootstrap.min.js"></script>
+    <script src="/owl-carousel/owl.carousel.min.js"></script>
+    <script src="/js2/isotope-docs.min.js?6"></script>
+    <script src="/js2/main.js"></script>
 </body>
 
 </html>

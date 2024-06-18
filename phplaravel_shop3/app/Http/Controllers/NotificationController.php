@@ -26,15 +26,9 @@ class NotificationController extends Controller
         return redirect()->back()->with('success', 'Sự kiện và thông báo đã được tạo!');
     }
 
-    public function markAsRead($notificationId)
+    public function markAsRead()
     {
-        $notification = Notification::find($notificationId);
-        if ($notification && $notification->user_id == auth()->id()) {
-            $notification->read = true;
-            $notification->save();
-        }
-
-        return redirect($notification->link ?? '/');  // Nếu không có link, quay về trang chủ
+        auth()->user()->unreadNotifications->markAsRead();
+        return response()->json(['status' => 'success']);
     }
 }
-

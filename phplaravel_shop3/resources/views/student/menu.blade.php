@@ -13,45 +13,38 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ route('edit') }}">Tao San Pham</a>
                                     <a class="nav-link" href="{{ route('sukien') }}">Tham gia su kien</a>
-                                    <a class="nav-link" href="{{ route('product.history') }}">Lịch sử</a>
+                                
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Oders
+                                Thông Báo
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Thay đổi
+                                    Thông báo về bài đăng
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="">Sản phẩm</a>
-                                            <a class="nav-link" href="">Phương thức thanh toán</a>
-                                            <a class="nav-link" href="">Huỷ/Yêu cầu đổi trả</a>
+                                            <a class="nav-link" href="">Chi Tiết</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Lịch sử
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                    Lịch sử mua bán
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
-                                    
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ route('purchase.historya') }}">Chi Tiết</a>
+                                        </nav>
+                                    </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
+                           
                             <a class="nav-link" href="/">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                Home

@@ -8,8 +8,9 @@ use App\Models\ExhibitionEntry;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\Event;
-
 use Carbon\Carbon;
+use App\Notifications\EntryLiked;
+
 class LikeController extends Controller
 {
     public function like($id)
@@ -26,6 +27,9 @@ class LikeController extends Controller
                 'user_id' => Auth::id(),
                 'exhibition_entry_id' => $entry->id,
             ]);
+
+            // Gửi thông báo cho người dùng
+            $entry->user->notify(new EntryLiked($like));
 
             return response()->json(['status' => 'liked', 'likes_count' => $entry->likes->count()]);
         } catch (\Exception $e) {
@@ -57,6 +61,3 @@ class LikeController extends Controller
         }
     }
 }
-
-
-

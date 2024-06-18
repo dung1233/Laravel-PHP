@@ -9,6 +9,8 @@ use App\Models\Prices;
 use App\Models\PurchaseHistory;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\EntryApproved;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -66,14 +68,27 @@ class AdminController extends Controller
 
         return view('Admin.xetduyet', compact('entries', 'totalTickets', 'totalPrice', 'totalEntries'));
     }
+
+
+  
+
     public function updateStatus(Request $request, $id)
     {
         $entry = ExhibitionEntry::find($id);
         $entry->status = $request->status;
+      
         $entry->save();
-
+        
+    
+        if ($entry->status == 'accepted' || $entry->status == 'rejected') {
+            $entry->user->notify(new EntryApproved($entry, $entry->status));
+        }
+    
         return redirect()->back()->with('success', 'Status updated successfully.');
     }
+
+
+
     public function history()
     {
         $entries = ExhibitionEntry::with('user', 'exhibition')->get();
@@ -88,72 +103,72 @@ class AdminController extends Controller
 
 
         $entries = ExhibitionEntry::where('status', 'pending')->get();
-    $totalTickets = PurchaseHistory::sum('quantity');
-    $totalPrice = PurchaseHistory::sum('total_price');
-    $totalEntries = ExhibitionEntry::count();
-    $entriesByMonth = ExhibitionEntry::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-        ->groupBy('month')
-        ->pluck('count', 'month')
-        ->toArray();
+        $totalTickets = PurchaseHistory::sum('quantity');
+        $totalPrice = PurchaseHistory::sum('total_price');
+        $totalEntries = ExhibitionEntry::count();
+        $entriesByMonth = ExhibitionEntry::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->pluck('count', 'month')
+            ->toArray();
 
-    // Tạo một mảng với đủ 12 tháng và gán số lượng bài đăng vào từng tháng
-    $entriesData = array_fill(1, 12, 0);
-    foreach ($entriesByMonth as $month => $count) {
-        $entriesData[$month] = $count;
-    }
+        // Tạo một mảng với đủ 12 tháng và gán số lượng bài đăng vào từng tháng
+        $entriesData = array_fill(1, 12, 0);
+        foreach ($entriesByMonth as $month => $count) {
+            $entriesData[$month] = $count;
+        }
 
-    $ticketsByMonth = PurchaseHistory::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-        ->groupBy('month')
-        ->pluck('count', 'month')
-        ->toArray();
+        $ticketsByMonth = PurchaseHistory::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->pluck('count', 'month')
+            ->toArray();
 
-    // Tạo một mảng với đủ 12 tháng và gán số lượng vé vào từng tháng
-    $ticketsData = array_fill(1, 12, 0);
-    foreach ($ticketsByMonth as $month => $count) {
-        $ticketsData[$month] = $count;
-    }
+        // Tạo một mảng với đủ 12 tháng và gán số lượng vé vào từng tháng
+        $ticketsData = array_fill(1, 12, 0);
+        foreach ($ticketsByMonth as $month => $count) {
+            $ticketsData[$month] = $count;
+        }
 
-    $salesData = PurchaseHistory::selectRaw('DATE(created_at) as date, SUM(total_price) as total_sales')
-    ->groupBy(DB::raw('DATE(created_at)'))
-    ->orderBy('date')
-    ->get();
-
-    // Chuyển đổi dữ liệu sang định dạng mà Chart.js có thể sử dụng
-    $dates = [];
-    $sales = [];
-    foreach ($salesData as $data) {
-        $dates[] = $data->date;
-        $sales[] = $data->total_sales;
-    }
-
-    return view('Admin.chart', compact('entries', 'totalTickets', 'totalPrice', 'totalEntries', 'entriesData', 'ticketsData', 'dates', 'sales'));
-    }
-    public function getChartData(Request $request)
-{
-    $period = $request->input('period', 'month');
-
-    if ($period == 'month') {
         $salesData = PurchaseHistory::selectRaw('DATE(created_at) as date, SUM(total_price) as total_sales')
             ->groupBy(DB::raw('DATE(created_at)'))
             ->orderBy('date')
             ->get();
-    } else {
-        $salesData = PurchaseHistory::selectRaw('YEAR(created_at) as date, SUM(total_price) as total_sales')
-            ->groupBy(DB::raw('YEAR(created_at)'))
-            ->orderBy('date')
-            ->get();
-    }
 
-    $dates = [];
-    $sales = [];
-    foreach ($salesData as $data) {
-        $dates[] = $data->date;
-        $sales[] = $data->total_sales;
-    }
+        // Chuyển đổi dữ liệu sang định dạng mà Chart.js có thể sử dụng
+        $dates = [];
+        $sales = [];
+        foreach ($salesData as $data) {
+            $dates[] = $data->date;
+            $sales[] = $data->total_sales;
+        }
 
-    return response()->json([
-        'dates' => $dates,
-        'sales' => $sales,
-    ]);
-}
+        return view('Admin.chart', compact('entries', 'totalTickets', 'totalPrice', 'totalEntries', 'entriesData', 'ticketsData', 'dates', 'sales'));
+    }
+    public function getChartData(Request $request)
+    {
+        $period = $request->input('period', 'month');
+
+        if ($period == 'month') {
+            $salesData = PurchaseHistory::selectRaw('DATE(created_at) as date, SUM(total_price) as total_sales')
+                ->groupBy(DB::raw('DATE(created_at)'))
+                ->orderBy('date')
+                ->get();
+        } else {
+            $salesData = PurchaseHistory::selectRaw('YEAR(created_at) as date, SUM(total_price) as total_sales')
+                ->groupBy(DB::raw('YEAR(created_at)'))
+                ->orderBy('date')
+                ->get();
+        }
+
+        $dates = [];
+        $sales = [];
+        foreach ($salesData as $data) {
+            $dates[] = $data->date;
+            $sales[] = $data->total_sales;
+        }
+
+        return response()->json([
+            'dates' => $dates,
+            'sales' => $sales,
+        ]);
+    }
 }

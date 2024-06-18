@@ -24,7 +24,7 @@ class PriceController extends Controller
             foreach ($request->prices as $id => $price) {
                 Price::where('id', $id)->update(['price' => $price]);
             }
-            return ('thành công');
+            Return redirect()->route('admin.prices.index')->with('OK', ' cập nhật giá vé.');
         } else {
             return redirect()->route('admin.prices.index')->with('error', 'Đã xảy ra lỗi khi cập nhật giá vé.');
         }

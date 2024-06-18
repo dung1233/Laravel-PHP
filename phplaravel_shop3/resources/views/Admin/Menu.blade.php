@@ -70,11 +70,11 @@ aria-expanded="true" aria-controls="collapsePages">
 <div class="bg-white py-2 collapse-inner rounded">
     <h6 class="collapse-header">QUản lý sinh viên :</h6>
     <a class="collapse-item" href="{{ route('admin.history') }}">DS sinh viên đăng bài</a>
-    <a class="collapse-item" href="forgot-password.html">DS siên viên đoạt giải</a>
+    <!-- <a class="collapse-item" href="forgot-password.html">DS siên viên đoạt giải</a> -->
     <a class="collapse-item" href="forgot-password.html"></a>
     <div class="collapse-divider"></div>
     <h6 class="collapse-header">Quản lý :</h6>
-    <a class="collapse-item" href="{{ route('purchase.history') }}">Danh sách người mua</a>
+    <a class="collapse-item" href="{{ route('purchase.historyb') }}">Danh sách người mua</a>
 </div>
 </div>
 </li>
@@ -86,11 +86,7 @@ aria-expanded="true" aria-controls="collapsePages">
 </li>
 <!-- Nav Item - Tables -->
 <li class="nav-item">
-<a class="nav-link" href="tables.html">
-<i class="fas fa-fw fa-table"></i>
-<span>Tables</span></a>
-<li class="nav-item">
-<a class="nav-link" href="{{ url('/') }}">
+<a class="nav-link" href="/">
 <i class="fas fa-fw fa-table"></i>
 <span>Home</span></a>
 </li>

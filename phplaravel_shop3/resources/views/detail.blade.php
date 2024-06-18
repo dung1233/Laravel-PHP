@@ -33,15 +33,16 @@
                         </ul>
                     </div>
                     <ul class="navbar-nav float-right menu-links">
-                        <li class="nav-item">
-                            <a class="nav-link " href="/">Trang Chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('profile.Event') }}">Event</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
-                        </li>
+                    <li class="nav-item">
+              <a class="nav-link " href="#">Trang Chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('profile.Event') }}">Sự Kiện</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
+            </li>
+
 
                         @auth
                         @if(Auth::user()->UserType === 2)

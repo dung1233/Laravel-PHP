@@ -275,7 +275,7 @@
                             <img src="/images/event1.webp" alt="Loại vé" class="img-thumbnail" style="width: 15%;">
                             <div class="ms-3">
                                 <h6 class="my-0">Loại Vé: {{ $item['name'] }}</h6>
-                                <small class="text-muted">{{ number_format($item['total_price'], 0, ',', '.') }} VNĐ x {{ $item['quantity'] }}</small>
+                                <small class="text-muted">{{ number_format($item['total_price'], 0, ',', '.') }} VNĐ : {{ $item['quantity'] }}</small>
                                 <p class="text-muted">Ngày triển lãm: {{ $item['date'] }}</p>
                                 <p class="text-muted">Khung giờ: {{ $item['time'] }}</p>
                             </div>

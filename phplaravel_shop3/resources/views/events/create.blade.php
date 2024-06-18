@@ -12,73 +12,74 @@
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
-        
+    .form-container {
+        background: white;
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
 
-        .form-container {
-            background: white;
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .form-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
 
-        .form-container label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+    .form-container input[type="text"],
+    .form-container textarea,
+    .form-container input[type="datetime-local"],
+    .form-container select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        /* so padding doesn't affect width */
+    }
 
-        .form-container input[type="text"],
-        .form-container textarea,
-        .form-container input[type="datetime-local"],
-        .form-container select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box; /* so padding doesn't affect width */
-        }
+    .form-container button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
-        .form-container button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-        }
+    .form-container button:hover {
+        background-color: #218838;
+    }
 
-        .form-container button:hover {
-            background-color: #218838;
-        }
+    .form-container a {
+        display: inline-block;
+        margin-bottom: 15px;
+        color: #007bff;
+        text-decoration: none;
+    }
 
-        .form-container a {
-            display: inline-block;
-            margin-bottom: 15px;
-            color: #007bff;
-            text-decoration: none;
-        }
+    .form-container a:hover {
+        text-decoration: underline;
+    }
 
-        .form-container a:hover {
-            text-decoration: underline;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-    </style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>
 
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -289,7 +290,7 @@
                         <a href="{{ route('profile.admin') }}" class="btn btn-primary">Quay trở về</a>
                     </div>
                     <div class="form-container">
-                       
+
                         <h2>Create Event</h2>
                         <form method="POST" action="/admin/create/store" class="fomrss">
                             @csrf
@@ -375,6 +376,29 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(Session::has('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công',
+            text: '{{ Session::get('
+            success ') }}',
+            confirmButtonText: 'OK'
+        });
+        @endif
+
+        @if(Session::has('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi',
+            text: '{{ Session::get('
+            error ') }}',
+            confirmButtonText: 'OK'
+        });
+        @endif
+    });
+</script>
 
 
 

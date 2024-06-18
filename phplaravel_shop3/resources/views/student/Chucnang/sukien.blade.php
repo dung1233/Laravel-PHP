@@ -33,16 +33,16 @@
                         </ul>
                     </div>
                     <ul class="navbar-nav float-right menu-links">
-                        <li class="nav-item">
-                            <a class="nav-link " href="/">Trang Chủ</a>
-                        </li>
+                    <li class="nav-item">
+              <a class="nav-link " href="/">Trang Chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('profile.Event') }}">Sự Kiện</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
+            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('storeExhibition') }}">Event</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
-                        </li>
 
 
                         @auth
@@ -125,7 +125,7 @@
                 </div>
                 <div style="margin: 10px;">
                     <br>
-                    <h2 style="font-size: 1.25rem; color: rgb(255, 145, 77)"><b>{{ $latestExhibition->Title }}</b>
+                    <h2 style="font-size: 2.25rem; color: rgb(255, 145, 77)"><b>{{ $latestExhibition->Title }}</b>
 
                     </h2>
                     @else

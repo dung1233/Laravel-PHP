@@ -12,6 +12,9 @@ class PurchaseHistory extends Model
     protected $fillable = [
         'user_id', 'ticket_type', 'name', 'quantity', 'total_price', 'date', 'time','status'
     ];
+    protected $casts = [
+        'date' => 'datetime:Y-m-d',
+    ];
 
     public function user()
     {

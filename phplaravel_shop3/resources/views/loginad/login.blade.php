@@ -62,23 +62,13 @@
                                     </form>
 
                                     <!-- Phần đăng xuất -->
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf <!-- Add CSRF token for protection -->
-                                        <button type="submit" class="btn btn-secondary btn-user btn-block">Logout</button>
-                                    </form>
-
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
-                                    </a>
-                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                    </a>
+                                    
                                     
 
 
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="{{ route('reset') }}">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="{{ route('create.account') }}">Create an Account!</a>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Auth\Events\Login;
 
 class LoginController extends Controller
 {
@@ -61,6 +62,9 @@ class LoginController extends Controller
         }
     
         return redirect('/');
+    }
+    public function reset(){
+        return view('Loginad.resetpass');
     }
     
 }

@@ -268,11 +268,7 @@
                             </div>
                         </div>
                         <div>
-                            <form action="{{ route('tickets.cart.remove', $index) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                            </form>
+                            
                         </div>
                     </li>
                     @empty

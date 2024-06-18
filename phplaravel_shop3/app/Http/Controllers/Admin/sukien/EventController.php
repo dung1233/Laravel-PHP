@@ -12,7 +12,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use Carbon\Carbon;
-
+use App\Notifications\CommentAdded;
 
 class EventController extends Controller
 {
@@ -28,7 +28,7 @@ class EventController extends Controller
         $event->StartDate = $request->start_time; // Đảm bảo tên trường phù hợp
         $event->EndDate = $request->end_time; // Đảm bảo tên trường phù hợp
         $event->Location = $request->location; // Thêm trường này nếu bạn đã thêm vào form và muốn lưu
-        
+
         $event->save();
 
         if ($event) {
@@ -37,8 +37,7 @@ class EventController extends Controller
             Session::flash('error', 'Đã xảy ra lỗi. Vui lòng thử lại sau!');
         }
 
-
-        return view('notification');
+        return redirect()->back();
     }
     public function history()
     {
@@ -187,7 +186,7 @@ class EventController extends Controller
         $exhibitions = Event::all();
 
 
-        return view('detail', compact('entry','event', 'entries', 'exhibitions', 'isOngoing'));
+        return view('detail', compact('entry', 'event', 'entries', 'exhibitions', 'isOngoing'));
     }
 
     public function storeComment(Request $request, $id)
@@ -203,11 +202,14 @@ class EventController extends Controller
             return redirect()->back()->with('alert', 'Sự kiện đã kết thúc, không thể bình luận bài đăng này.');
         }
 
-        Comment::create([
+        $comment = Comment::create([
             'exhibition_entry_id' => $id,
             'user_id' => Auth::id(),
             'comment' => $request->input('comment'),
         ]);
+
+        // Gửi thông báo
+        $entry->user->notify(new CommentAdded($comment));
 
         return redirect()->route('entries.show', $id)->with('success', 'Bình luận đã được thêm.');
     }

@@ -32,12 +32,12 @@
                     <div>
                         <ul class="navbar-nav mx-auto logo-desktop">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#"><img src="images/logo.png" alt="Vista Pro" /></a>
+                            <a class="nav-link" href="#"><img src="/images/GIGAMAIL.png" alt="Vista Pro" style="width: 25%" /></a>
                             </li>
                         </ul>
                     </div>
                     <ul class="navbar-nav float-right menu-links">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link " href="/">Trang Chủ</a>
                         </li>
                         <li class="nav-item">
@@ -46,7 +46,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('tickets.create') }}">Mua vé</a>
                         </li>
-                       
+
 
                         @auth
                         @if(Auth::user()->UserType === 2)
@@ -172,28 +172,28 @@
                 </div>
                 <!-- <p>{{ $latestExhibition->Description }}</p> -->
                 <div class="details">
-        <div>
-            <i class="fas fa-calendar-alt"></i>
-            <p>Ngày Bắt Đầu:</p>
-            <p>{{ $latestExhibition->StartDate->format('d/m/Y H:i') }}</p>
-        </div>
-        <div>
-            <i class="fas fa-clock"></i>
-            <p>Thời Gian Bình Chọn</p>
-            <p>Thứ 2-CN</p>
-        </div>
-        <div>
-            <i class="fas fa-calendar-check"></i>
-            <p>Ngày Kết Thúc:</p>
-            <p>{{ $latestExhibition->EndDate ? $latestExhibition->EndDate->format('d/m/Y H:i') : 'Chưa xác định' }}</p>
-        </div>
-        <div>
-            <i class="fas fa-map-marker-alt"></i>
-            <p>Địa Điểm Tổ Chức:</p>
-            <p>{{ $latestExhibition->Location }}</p>
+                    <div>
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Ngày Bắt Đầu:</p>
+                        <p>{{ $latestExhibition->StartDate->format('d/m/Y H:i') }}</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-clock"></i>
+                        <p>Thời Gian Bình Chọn</p>
+                        <p>Thứ 2-CN</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-calendar-check"></i>
+                        <p>Ngày Kết Thúc:</p>
+                        <p>{{ $latestExhibition->EndDate ? $latestExhibition->EndDate->format('d/m/Y H:i') : 'Chưa xác định' }}</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Địa Điểm Tổ Chức:</p>
+                        <p>{{ $latestExhibition->Location }}</p>
 
-        </div>
-    </div>
+                    </div>
+                </div>
                 <!-- <div class="ikn">
                     <div class="ikb">
                         <div><img src="icon/icon-calendar-20231107042404-tnwba.png" alt="" srcset=""></div>
@@ -237,14 +237,14 @@
                         <img src="{{ asset($entry->image_path) }}" alt="{{ $entry->name }}">
                         <div class="card-img-overlay">
                             <div class="top-buttons clearfix">
-                                <a href="#"><span class="img-icon"><img src="{{ asset('images/share.png') }}" alt="share icon" /></span> <span class="txt">Share Now</span></a>
+
                                 <a href="#" class="like-button" data-id="{{ $entry->id }}" data-liked="{{ $entry->likes->where('user_id', Auth::id())->count() > 0 ? 'true' : 'false' }}">
                                     <span class="img-icon"><img src="{{ asset('images/heart.png') }}" class="{{ $entry->likes->where('user_id', Auth::id())->count() > 0 ? 'liked' : '' }}" alt="heart icon" /></span>
-                                    <span class="txt">{{ $entry->likes->count() }} Likes</span>
+                                    <span class="txt">{{ $entry->likes->count() }} Like</span>
                                 </a>
                             </div>
                             <div class="top-buttons bottom-buttons clearfix">
-                            <a href="{{ route('entries.show', ['id' => $entry->id]) }}"><span class="txt">Contact Now</span></a>
+                                <a href="{{ route('entries.show', ['id' => $entry->id]) }}"><span class="txt">Contact Now</span></a>
                                 <a href="{{ asset($entry->image_path) }}" class="image-link">
                                     <span class="img-icon"><img src="{{ asset('images/eye.png') }}" alt="eye icon" /></span>
                                     <span class="txt">Full View</span>
@@ -261,70 +261,70 @@
         </div>
 
 
-    <footer class="container-fluid fh5co-footer">
-        <div class="container" id="contact">
-            <div class="row">
-                <div class="col-lg-5">
-                    <h2>CONTACT US TODAY NOW</h2>
-                    <p class="light">
-                        If you are looking for a Photographer
-                    </p>
-                    <p>
-                        <span class="email"><img src="images/email.png" alt="email icon" /></span><b>contact@example.com</b>
-                    </p>
-                    <p>
-                        <span class="phone"><img src="images/phone.png" alt="phone icon" /></span><b>+123-456-7890</b>
-                    </p>
-                    <h3>We Are Social:</h3>
-                    <ul class="navbar-nav float-left social-links footer-social">
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://www.facebook.com/fh5co"><i class="fab fa-facebook-f"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-pinterest-p"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="https://twitter.com/fh5co"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-google-plus-g"></i></a>
-                        </li>
+        <footer class="container-fluid fh5co-footer">
+            <div class="container" id="contact">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <h2>CONTACT US TODAY NOW</h2>
+                        <p class="light">
+                            If you are looking for a Photographer
+                        </p>
+                        <p>
+                            <span class="email"><img src="images/email.png" alt="email icon" /></span><b>contact@example.com</b>
+                        </p>
+                        <p>
+                            <span class="phone"><img src="images/phone.png" alt="phone icon" /></span><b>+123-456-7890</b>
+                        </p>
+                        <h3>We Are Social:</h3>
+                        <ul class="navbar-nav float-left social-links footer-social">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.facebook.com/fh5co"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-pinterest-p"></i></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="https://twitter.com/fh5co"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#"><i class="fab fa-google-plus-g"></i></a>
+                            </li>
 
-                    </ul>
-                </div>
-
-                <div class="col-lg-7">
-                    <div class="form-box">
-                        <h4>What would you like to talk about</h4>
-                        <p>We'd Love to Hear From you !</p>
-                        <hr />
-                        <table class="table table-light table-borderless">
-                            <tr>
-                                <td><input type="text" class="form-control" placeholder="Name...">
-                                </td>
-
-                                <td><input type="text" class="form-control" placeholder="Email address">
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="2"><textarea class="form-control" placeholder="You Message"></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <button type="submit">
-                                        SUBMIT NOW
-                                    </button>
-
-                                </td>
-                            </tr>
-                        </table>
+                        </ul>
                     </div>
+
+                    <div class="col-lg-7">
+                        <div class="form-box">
+                            <h4>What would you like to talk about</h4>
+                            <p>We'd Love to Hear From you !</p>
+                            <hr />
+                            <table class="table table-light table-borderless">
+                                <tr>
+                                    <td><input type="text" class="form-control" placeholder="Name...">
+                                    </td>
+
+                                    <td><input type="text" class="form-control" placeholder="Email address">
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2"><textarea class="form-control" placeholder="You Message"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="submit">
+                                            SUBMIT NOW
+                                        </button>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
                 </div>
-
-
             </div>
-        </div>
-    </footer>
-        
+        </footer>
+
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -348,7 +348,7 @@
             });
             $(document).ready(function() {
                 $('.like-button').click(function(e) {
-                    e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+                    e.preventDefault();
 
                     @if(!Auth::check())
                     alert('Yêu cầu đăng nhập để thích mục này.');
@@ -384,6 +384,21 @@
                         error: function(xhr, status, error) {
                             console.error('Error:', error);
                             console.error('Response:', xhr.responseText);
+                            if (xhr.status === 403) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Lỗi',
+                                    text: xhr.responseJSON.error,
+                                    confirmButtonText: 'OK'
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Lỗi',
+                                    text: 'Đã xảy ra lỗi. Vui lòng thử lại sau.',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
                         }
                     });
                 });

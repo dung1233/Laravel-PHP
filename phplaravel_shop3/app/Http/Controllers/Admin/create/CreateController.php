@@ -47,14 +47,13 @@ class CreateController extends Controller
     }
     public function Event(){
         $exhibitions = Event::all();
-        $products = Product::all();
-        $electronics = Product::where('product_type', 'Electronics')->get();
-        $oilpainting = Product::where('product_type', 'Oilpainting')->get();
+       
+        
         $entries = ExhibitionEntry::all();
 
       
  
-        return view('admin.Event',compact('products', 'electronics', 'oilpainting', 'entries','exhibitions'));
+        return view('admin.Event',compact('entries','exhibitions'));
     }
     public function show($id)
     {
